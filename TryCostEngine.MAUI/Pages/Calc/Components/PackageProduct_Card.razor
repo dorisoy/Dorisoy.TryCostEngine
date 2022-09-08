@@ -1,0 +1,127 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+@using Newtonsoft.Json
+
+@*套装信息*@
+
+<MudGrid>
+    <MudItem xs="12" sm="6" md="2">
+        <MudSwitch @bind-Checked="@Model.IsHaveRate" Label="是否有产品比例" Color="Color.Primary" Class="mb-4" />
+    </MudItem>
+</MudGrid>
+
+
+<MudTable Items="@Items"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+
+    <ColGroup>
+        <col style="width: 120px" />
+        <col style="width: 120px"/>
+        <col />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">操作</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">套装编号</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">产品信息</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        @*操作*@
+        <MudTd Class="pa-2 gap-2 justify-center align-center">
+            <MudForm Model="@context">
+                <MudButtonGroup Variant="Variant.Filled">
+                    <MudIconButton Icon="@Icons.Filled.Add"
+                                   Color="Color.Primary"
+                                   OnClick="AddPackage" />
+
+                    <MudIconButton Icon="@Icons.Filled.Delete"
+                                   Color="Color.Primary"
+                                   OnClick="@(()=>RemovePackage(context.SetNo))" />
+                </MudButtonGroup>
+            </MudForm>
+        </MudTd>
+        @*套装编号*@
+        <MudTd Class="pa-2 gap-2" DataLabel="SetNo">
+
+           <MudTextField T="string" Value="@context.SetNo"
+                              ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+        </MudTd>
+        @*产品信息*@
+        <MudTd Class="pa-2 gap-2">
+            <CascadingValue Value="@ParameterModel" Name="ParameterModel" IsFixed>
+                <PackageProduct_Item_Card Items="@context.Sets" IsHaveRate="@Model.IsHaveRate" />
+            </CascadingValue>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code
+{
+    [Parameter]
+    public ProtocolBaseFydlzh Model { get; set; }
+
+    private List<ProtocolBaseFydlzhDatum> _items;
+    [Parameter]
+    public List<ProtocolBaseFydlzhDatum> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+
+    /// <summary>
+    /// 添加套装
+    /// </summary>
+    private void AddPackage()
+    {
+        var that = Items.First();
+        var temp = CloneExtends.DeepCloneObject<ProtocolBaseFydlzhDatum>(that);
+        temp.SetNo = UtilHelpher.GenerateSerialNumber("TZ", Items.Count);
+        Items.Add(temp);
+    }
+    /// <summary>
+    /// 移除套装
+    /// </summary>
+    /// <param name="no"></param>
+    private void RemovePackage(string no)
+    {
+        if (Items.Count <= 1) return;
+        var find =Items.Where(s => s.SetNo == no).First();
+        if (find != null)
+            Items.Remove(find);
+    }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var ps = ParameterModel.Model.goodInfo;
+        Items.ForEach(s =>
+            {
+                s.Sets.ForEach(sp =>
+                {
+                    sp.GoodNm = ps.Where(g => g.GoodCD == sp.SetGoodCD).Select(n => n.GoodNm).First();
+                });
+            });
+    }
+
+}

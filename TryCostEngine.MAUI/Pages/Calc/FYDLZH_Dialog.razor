@@ -1,0 +1,289 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using Newtonsoft.Json;
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Calculate" Color="Color.Primary" Class="mr-3 mb-n1" />
+            @this.MudDialog.Title — 规则创建
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <CascadingValue Value="@ParameterModel" Name="ParameterModel" IsFixed>
+            <MudForm Model="@ParameterModel.Model" @ref="@form" ValidationDelay="0" Style="height:700px">
+                @*设计模式*@
+                @if (!IsCodeMode)
+                {
+                    <MudTabs Elevation="1"
+                         Rounded="true"
+                         MaxHeight="700"
+                         Style="height:700px;overflow-y: scroll"
+                         ApplyEffectsToContainer="true"
+                         PanelClass="pa-4"
+                         Border="true"
+                         @bind-ActivePanelIndex="CurrentStep"
+                         @ref="tabs">
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="基本信息">
+                            <BaseInfo_Card Model="@ParameterModel.Model.basicInfo" />
+                        </MudTabPanel>
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="受益商品">
+                            <Product_Card Items="@ParameterModel.Model.goodInfo"/>
+                        </MudTabPanel>
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="套装信息">
+                            <PackageProduct_Card Items="@Datas" Model="ParameterModel.Model.fydlzhTR" />
+                        </MudTabPanel>
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="投入信息">
+                            <Touru_Card Items="@Datas" Model="ParameterModel.Model.fydlzhTR"/>
+                        </MudTabPanel>
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="兑付信息">
+                            <FreeInfo_Card Items="@Datas" />
+                        </MudTabPanel>
+
+                        <MudTabPanel Icon="@Icons.Outlined.Info" Text="核销规则">
+                            <PayInfo_Card Items="@Datas" />
+                        </MudTabPanel>
+                    </MudTabs>
+                }
+                else
+                {
+                    @*专家模式*@
+                    <MudTabs Outlined="true"
+                         Position="@Position.Bottom"
+                         Rounded="true"
+                         MaxHeight="700"
+                         Style="height:700px;overflow-y: hidden"
+                         ApplyEffectsToContainer="true"
+                         Border="true"
+                         PanelClass="pa-0">
+                        <MudTabPanel Text=".tpm">
+                            <TPMCodeEditer EditorId="codemirror-editor-tpm" Language="tpm" />
+                        </MudTabPanel>
+                    </MudTabs>
+                }
+            </MudForm>
+        </CascadingValue>
+    </DialogContent>
+    <DialogActions>
+
+        <MudSwitch @bind-Checked="@IsCodeMode"
+                   Label="@(IsCodeMode?"专业模式":"设计模式")"
+                   Color="Color.Primary"
+                   Class="ml-4" />
+
+        <MudSpacer />
+
+        @if (IsCodeMode)
+        {
+            <MudButton StartIcon="@Icons.Filled.CopyAll" Variant="Variant.Filled" OnClick="CopyTextToClipboard" Color="Color.Info" Class="mr-2 mb-4">拷贝</MudButton>
+            <MudButton StartIcon="@Icons.Filled.Delete" Variant="Variant.Filled" OnClick="ReSet" Class="mr-2 mb-4">清空</MudButton>
+        }
+
+        @if (ShowSkipPrevious && !IsCodeMode)
+        {
+            <MudButton StartIcon="@Icons.Filled.SkipPrevious" Variant="Variant.Filled" Color="Color.Primary" Class="mr-2 mb-4" OnClick="() => Activate(-1)">上一步</MudButton>
+        }
+
+        @if (ShowSkipNext && !IsCodeMode)
+        {
+            <MudButton StartIcon="@Icons.Filled.SkipNext" Variant="Variant.Filled" Color="Color.Primary" Class="mr-4 mb-4" OnClick="() => Activate(1)">下一步</MudButton>
+        }
+
+
+        @if (ShowSubmit || IsCodeMode)
+        {
+            <MudButton Variant="Variant.Filled" OnClick="Cancel" Class="mr-2 mb-4">重算</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="PorfitCalSubmit" Class="mr-2 mb-4">利润测算</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CostCalSubmit" Class="mr-4 mb-4">费用计算</MudButton>
+        }
+
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    //[Inject] public IJSInProcessRuntime JsRuntime { get; set; }
+    [Inject] protected IJsApiService JsApiService { get; set; }
+    [Inject] protected ITPCalcService tPCalcService { get; set; }
+
+
+    public FYDLZH_Dialog()
+    {
+    }
+
+    private bool _IsCodeMode;
+    public bool IsCodeMode
+    {
+        get { return _IsCodeMode; }
+        set
+        {
+            _IsCodeMode = value;
+        }
+    }
+
+    public bool ShowSubmit { get; set; } = false;
+    public bool ShowSkipPrevious { get; set; } = true;
+    public bool ShowSkipNext { get; set; } = true;
+
+    private MudTabs tabs;
+    private int Step = 5;
+
+    private int _CurrentStep = 0;
+    public int CurrentStep
+    {
+        get { return _CurrentStep; }
+        set
+        {
+            _CurrentStep = value;
+            if (_CurrentStep >= Step)
+            {
+                ShowSubmit = true;
+                ShowSkipPrevious = true;
+                ShowSkipNext = false;
+            }
+            else
+            {
+                ShowSubmit = false;
+                ShowSkipPrevious = true;
+                ShowSkipNext = true;
+            }
+        }
+    }
+
+    void Activate(int index)
+    {
+        ShowSubmit = false;
+        ShowSkipPrevious = true;
+        ShowSkipNext = true;
+        if (index < 0)
+        {
+            if (CurrentStep == 0)
+                return;
+            else
+                CurrentStep -= Math.Abs(index);
+        }
+        else
+        {
+            CurrentStep += index;
+            if (CurrentStep >= Step)
+            {
+                CurrentStep = Step;
+                ShowSubmit = true;
+                ShowSkipPrevious = true;
+                ShowSkipNext = false;
+            }
+        }
+        //Snackbar.Add($"{CurrentStep}", MudBlazor.Severity.Info);
+        tabs.ActivatePanel(CurrentStep);
+    }
+
+    private MudForm form;
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = new();
+
+    [Parameter]
+    public string CalcDes { get; set; }
+
+    [Parameter]
+    public ParameterModel ParameterModel { get; set; } = new();
+
+    /// <summary>
+    /// 投入信息结构
+    /// </summary>
+    private List<ProtocolBaseFydlzhDatum> Datas { get; set; } = new();
+
+
+    void Cancel() => MudDialog.Cancel();
+
+    //费用计算
+    private async void CostCalSubmit()
+    {
+        var data = new List<CostEngineFeeResult>();
+        var dialog = DialogService.Show<Loading>();
+        try
+        {
+            await Task.Delay(500);
+            var _httpClient = new HttpClient();
+            var url = $"/data/008/fydlzhTR-wbl-blbjg-fd-acp-dc/008.json?v={DateTime.Now.ToString()}";
+            var _jsonData = await _httpClient.GetStringAsync(url);
+            var result = tPCalcService.FeeCount(_jsonData);
+            if (result != null && result.Data.Any())
+            {
+                data = result.Data;
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, MudBlazor.Severity.Error);
+        }
+        finally
+        {
+            dialog.Close(DialogResult.Ok(true));
+        }
+
+        if (data != null && data.Any())
+        {
+            OpenCalcDialog(data);
+        }
+    }
+
+    void PorfitCalSubmit()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+
+    private void OpenCalcDialog(List<CostEngineFeeResult> data)
+    {
+        var param = new DialogParameters();
+        param.Add("Items", data);
+        DialogService.Show<Cost_Dialog>("测算结果", param, new DialogOptions()
+            {
+                FullWidth = true,
+                MaxWidth = MaxWidth.ExtraLarge,
+                CloseButton = true,
+                DisableBackdropClick = true,
+                CloseOnEscapeKey = true
+            });
+    }
+
+
+    private async Task CopyTextToClipboard()
+    {
+        await JsApiService.CopyToClipboardAsync(ParameterModel.TpmLangData);
+    }
+
+    private void ReSet()
+    {
+        //this.JsRuntime.InvokeVoid("App.Codemirror.setValue", "");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        //初始化
+        var ps = ParameterModel.Model.goodInfo;
+        ParameterModel.Model.fydlzhTR.data
+        .ForEach(s =>
+        {
+            s.Sets.ForEach(p =>
+            {
+                var nm = ps.Where(g => g.GoodCD == p.SetGoodCD).Select(n => n.GoodNm).FirstOrDefault();
+                p.GoodNm = nm;
+            });
+
+            Datas.Add(s.DeepCloneObject());
+        });
+    }
+
+}
+

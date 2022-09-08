@@ -1,0 +1,159 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+@using CostEngine.Util
+
+<MudTable Items="@Items"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+    <ColGroup>
+        <col />
+        @if (IsHaveRate)
+        {
+            <col style="width: 150px;" />
+        }
+        <col style="width: 120px;" />
+    </ColGroup>
+
+    <HeaderContent>
+
+        <MudTh Class="mud-all-table-header-row">产品</MudTh>
+
+        @if (IsHaveRate)
+        {
+            <MudTh Class="mud-all-table-header-row">比例（件数）</MudTh>
+        }
+
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">操作</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+
+        @*产品*@
+        <MudTd DataLabel="GoodNm" Class="pa-2 gap-2">
+            <MudForm Model="@context">
+                <MudAutocomplete T="string"
+                                 Variant="Variant.Outlined"
+                                 @bind-Value="context.GoodNm"
+                                 For="(() => context.GoodNm)"
+                                 SearchFunc="@SearchrPoducts"
+                                 ResetValueOnEmptyText="@resetValueOnEmptyText"
+                                 Margin="Margin.Dense"
+                                 CoerceText="@coerceText"
+                                 CoerceValue="@coerceValue"
+                                 AdornmentIcon="@Icons.Material.Filled.Search"
+                                 AdornmentColor="Color.Primary" />
+
+            </MudForm>
+        </MudTd>
+
+        @*比例（件数）*@
+        @if (IsHaveRate)
+        {
+            <MudTd Class="pa-2 gap-2" DataLabel="SetAmount">
+                <MudForm Model="@context">
+                    <MudNumericField @bind-Value="context.SetAmount"
+                                 Variant="Variant.Outlined"
+                                 Margin="Margin.Dense"
+                                 For="(() => context.SetAmount)" />
+                </MudForm>
+            </MudTd>
+        }
+
+        <MudTd Class="pa-2 gap-2 justify-center align-center">
+            <MudForm Model="@context">
+                <MudButtonGroup Variant="Variant.Filled">
+                    <MudIconButton Icon="@Icons.Filled.Add"
+                                   Color="Color.Primary"
+                                   OnClick="AddPackageItem" />
+
+                    <MudIconButton Icon="@Icons.Filled.Delete"
+                                   Color="Color.Primary"
+                                   OnClick="@(()=>RemovePackageItem(context.SetGoodCD))" />
+                </MudButtonGroup>
+            </MudForm>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+
+@code
+{
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
+    private List<ProtocolBaseGoodinfo> products;
+
+    [Parameter]
+    public string Title { get; set; }
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+
+    private bool _IsHaveRate { get; set; }
+    [Parameter]
+    public bool IsHaveRate
+    {
+        get { return _IsHaveRate; }
+        set
+        {
+            _IsHaveRate = value;
+        }
+    }
+
+    private List<ProtocolBaseSet> _items;
+    [Parameter]
+    public List<ProtocolBaseSet> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    private async Task<IEnumerable<string>> SearchrPoducts(string value)
+    {
+        await Task.Delay(5);
+        if (string.IsNullOrEmpty(value))
+            return new string[0];
+
+        return products.Select(s => s.GoodNm)
+        .Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Items.Any())
+            products = ParameterModel.Model.goodInfo;
+    }
+
+    private void AddPackageItem()
+    {
+        var that = Items.First();
+        var temp = CloneExtends.DeepCloneObject<ProtocolBaseSet>(that);
+        Items.Add(temp);
+    }
+
+    private void RemovePackageItem(string id)
+    {
+        if (Items.Count <= 1)
+        {
+            Snackbar.Add("已经是最后一项了!");
+            return;
+        }
+        var find = Items.Where(s => s.SetGoodCD == id).First();
+        if (find != null)
+            Items.Remove(find);
+    }
+}

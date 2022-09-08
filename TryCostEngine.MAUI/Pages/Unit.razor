@@ -1,0 +1,53 @@
+﻿@page "/unit"
+@page "/unit/tryrun"
+
+@layout DocsLayout
+@inject IDialogService Dialog
+
+@using TryCostEngine.MAUI.Pages.Calc
+
+<DocsPage DisplayFooter="true">
+    <DocsPageHeader>
+        <SpecialHeaderContent>
+            <MudText Typo="Typo.subtitle1" Class="docs-title-description">基于TPM.CostEngine的营销成本费用计算引擎.</MudText>
+        </SpecialHeaderContent>
+    </DocsPageHeader>
+    <DocsPageContent>
+        <MudPaper Elevation="0">
+            <MudTreeView Items="TreeItems"
+                         @bind-ActivatedValue="ActivatedValue"
+                         MultiSelection="true"
+                         Hover="true">
+                <ItemTemplate>
+                    <MudTreeViewItem @bind-Expanded="@context.IsExpanded"
+                                     Items="@context.TreeItems"
+                                     Value="@context"
+                                     Text="@context.Title"
+                                     EndText="@context.Des"
+                                     EndTextTypo="@Typo.caption" >
+                                    <Content>
+                                             <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild" />
+                                            @if (!context.HasChild)
+                                            {
+                                                <MudIcon  Icon="@Icons.Filled.Info" Class="ml-0 mr-2" Color="@Color.Info" />
+                                            }
+                                            <MudText Class="mr-16">@context.Title</MudText>
+                                            <MudText>@context.Des</MudText>
+                                    </Content>
+
+                                 </MudTreeViewItem>
+                </ItemTemplate>
+            </MudTreeView>
+        </MudPaper>
+        <div style="width: 100%">
+            <MudText Typo="@Typo.subtitle1">选择: @(ActivatedValue?.Title)</MudText>
+        </div>
+
+        <MudButton Variant="Variant.Filled" OnClick="CalcFeeCount" Class="mb-4">Dome</MudButton>
+    </DocsPageContent>
+</DocsPage>
+
+@code
+{
+  
+}

@@ -1,0 +1,36 @@
+﻿
+    <MudCard id="save-snippet-popup" Class="try-save-snippet" Style="@DisplayStyle" Elevation="8">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">保存代码片段</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent Class="py-0">
+            <ul>
+                <li>请 <b>不要</b> 包含任何个人资料.</li>
+                <li>请 <b>不要</b> 包含任何受版权保护的内容.</li>
+            </ul>
+            <div class="save-snippet-callout"></div>
+        </MudCardContent>
+        <MudCardActions Class="pb-2">
+            @if (string.IsNullOrWhiteSpace(SnippetLink))
+            {
+                <div>
+                    <MudButton Color="Color.Primary" Disabled="@Loading" @onclick="SaveAsync">确认</MudButton>
+
+                    @if (Loading)
+                    {
+                        <div class="spinner-border save-snippet-loader" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    }
+                </div>
+             }
+            else
+            {
+                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="SnippetLink" ReadOnly="true"/>
+                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy" OnClick="CopyLinkToClipboard" Class="pa-2" />
+            }
+
+        </MudCardActions>
+    </MudCard>

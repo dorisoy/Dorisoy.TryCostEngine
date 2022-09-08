@@ -1,0 +1,71 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+<style>
+    .mud-all-table-header-row {
+        background-color: var(--mud-palette-table-hover);
+    }
+</style>
+@*核销规则*@
+
+<MudTable Items="@Items"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+
+    <ColGroup>
+        <col style="width: 100px" />
+        <col />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入编号</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">计算规则</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+
+        @*投入编号*@
+        <MudTd Class="pa-2 gap-2" DataLabel="No">
+         <MudTextField @bind-Value="context.No"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense"
+                              ReadOnly="true" />
+        </MudTd>
+
+        @*计算规则*@
+        <MudTd Class="pa-2 gap-2" DataLabel="CalcRuleType">
+            <MudForm Model="@context">
+                <MudSelect @bind-Value="context.CalcRuleType"
+                           For="(() => context.CalcRuleType)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.CalcRuleMode item in Enum.GetValues(typeof(GEnum.CalcRuleMode)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudForm>
+        </MudTd>
+
+
+    </RowTemplate>
+</MudTable>
+@code
+{
+    [Parameter]
+    public List<ProtocolBaseFydlzhDatum> Items { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        //初始化
+    }
+}

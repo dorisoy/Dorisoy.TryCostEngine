@@ -1,0 +1,1093 @@
+{
+  "fydlzhTR": {
+    "data": [
+      {
+        "ID": "DF1",
+        "No": "008001",
+        "SetNo": "TZ001",
+        "ProductRequired": [
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "month1": "",
+            "month2": "",
+            "month3": "",
+            "month4": "",
+            "month5": "",
+            "month6": "",
+            "month7": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "month1": "",
+            "month2": "",
+            "month3": "",
+            "month4": "",
+            "month5": "",
+            "month6": "",
+            "month7": ""
+          }
+        ],
+        "month1": "1",
+        "month2": "1",
+        "month3": "1",
+        "month4": "1",
+        "month5": "1",
+        "month6": "1",
+        "month7": "1",
+        "BusinessType": "STP00100",
+        "BusinessTypeName": "合作费",
+        "ReqAmounts": [
+          {
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": "1"
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": ""
+          }
+        ],
+        "Packing": "1",
+        "GivingWay": "1",
+        "Details": [
+          {
+            "GivingWay": "1",
+            "DetailGoodCD": "310100502430000,310100502440000",
+            "BaseNum": "1",
+            "GiveGood": [
+              {
+                "ID": "GiveGood2",
+                "GoodCD": "",
+                "GiveAmount": "0"
+              }
+            ],
+            "Fee": 1,
+            "FixFee": "0",
+            "Rebate": {
+              "EntryPrice": "0",
+              "RebateRate": "0"
+            },
+            "BearWay": [
+              {
+                "ID": "BearWay2",
+                "GivingWay": "1",
+                "FillWay": "1",
+                "FeeCompany": 1,
+                "RateCompany": "100",
+                "FeeDistributor": "0",
+                "RateDistributor": "0"
+              }
+            ],
+            "PayRate": {
+              "PayRateC2D": "1",
+              "PayMonthsC2D": [
+                {
+                  "ID": "PayMonth2",
+                  "PayMonth": ""
+                }
+              ],
+              "PayRateD2T": "1",
+              "PayMonthsD2T": [
+                {
+                  "ID": "PayMonth2",
+                  "PayMonth": ""
+                }
+              ]
+            }
+          }
+        ],
+        "Sets": [
+          {
+            "ID": "Set1",
+            "SetGoodCD": "310100502430000",
+            "SetAmount": "1"
+          },
+          {
+            "ID": "Set2",
+            "SetGoodCD": "310100502440000",
+            "SetAmount": "1"
+          }
+        ],
+        "TimeLine": "2",
+        "CalcRule": "1"
+      },
+      {
+        "ID": "DF3",
+        "No": "008002",
+        "SetNo": "TZ002",
+        "ProductRequired": [
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "month1": "",
+            "month2": "",
+            "month3": "",
+            "month4": "",
+            "month5": "",
+            "month6": "",
+            "month7": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "month1": "",
+            "month2": "",
+            "month3": "",
+            "month4": "",
+            "month5": "",
+            "month6": "",
+            "month7": ""
+          }
+        ],
+        "month1": "1",
+        "month2": "1",
+        "month3": "1",
+        "month4": "1",
+        "month5": "1",
+        "month6": "1",
+        "month7": "1",
+        "BusinessType": "STP00100",
+        "BusinessTypeName": "合作费",
+        "ReqAmounts": [
+          {
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": "1"
+          },
+          {
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": "1"
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502430000",
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 1,
+            "NaturalMonth": "202201",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 2,
+            "NaturalMonth": "202202",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 3,
+            "NaturalMonth": "202203",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 4,
+            "NaturalMonth": "202204",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 5,
+            "NaturalMonth": "202205",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 6,
+            "NaturalMonth": "202206",
+            "Volumes": ""
+          },
+          {
+            "ProductRequiredGoodCD": "310100502440000",
+            "ProtocolMonth": 7,
+            "NaturalMonth": "202207",
+            "Volumes": ""
+          }
+        ],
+        "Packing": "1",
+        "GivingWay": "1",
+        "Details": [
+          {
+            "GivingWay": "1",
+            "DetailGoodCD": "310100502430000,310100502440000",
+            "BaseNum": "1",
+            "GiveGood": [
+              {
+                "ID": "GiveGood5",
+                "GoodCD": "",
+                "GiveAmount": "0"
+              }
+            ],
+            "Fee": 1,
+            "FixFee": "0",
+            "Rebate": {
+              "EntryPrice": "0",
+              "RebateRate": "0"
+            },
+            "BearWay": [
+              {
+                "ID": "BearWay5",
+                "GivingWay": "1",
+                "FillWay": "1",
+                "FeeCompany": 1,
+                "RateCompany": "100",
+                "FeeDistributor": "0",
+                "RateDistributor": "0"
+              }
+            ],
+            "PayRate": {
+              "PayRateC2D": "1",
+              "PayMonthsC2D": [
+                {
+                  "ID": "PayMonth5",
+                  "PayMonth": ""
+                }
+              ],
+              "PayRateD2T": "1",
+              "PayMonthsD2T": [
+                {
+                  "ID": "PayMonth5",
+                  "PayMonth": ""
+                }
+              ]
+            }
+          }
+        ],
+        "Sets": [
+          {
+            "ID": "Set1",
+            "SetGoodCD": "310100502430000",
+            "SetAmount": "1"
+          },
+          {
+            "ID": "Set2",
+            "SetGoodCD": "310100502440000",
+            "SetAmount": "1"
+          }
+        ],
+        "TimeLine": "2",
+        "CalcRule": "1"
+      }
+    ],
+    "InvestModeID": "0021",
+    "SortNum": 1,
+    "State": 0,
+    "IsHaveRate": true
+  },
+  "modeSorts": [ "fydlzhTR" ],
+  "basicInfo": {
+    "ID": "997419",
+    "TPProtocolType": "0",
+    "ProtocolType": "2",
+    "TmnCD": "1007375478",
+    "Capacity": "0",
+    "TpAddress": "延安路546号杭州大酒店",
+    "TmnNm": "杭州大酒店28楼",
+    "Distributor1CD": "0110000077",
+    "Distributor1Nm": "郭磊(0110000077)",
+    "Distributor2CD": "",
+    "Distributor2Rate": "0",
+    "StartDate": "2022-01-01",
+    "EndDate": "2022-07-31",
+    "ProtocolMonths": "7",
+    "Disc": "测试",
+    "Mode1": "01",
+    "Mode2": "01",
+    "Mode3": "01",
+    "TotalControl": "1",
+    "ProductControl": "0",
+    "AwardProductCtrl": "1",
+    "AwardProductDesc": "",
+    "ConvertCtrl": "0",
+    "ConvertDesc": "",
+    "ProtocolRemark": "",
+    "GeneralFiling": "1",
+    "ProductEnjoyStandard": "0",
+    "Lvl1Type": "S",
+    "Lvl3Type": "",
+    "XhNegotiator": "0010081535",
+    "XhNegotiatorNm": "冯玉龙",
+    "DtNegotiator": "",
+    "AgentSign": "0"
+  },
+  "goodInfo": [
+    {
+      "GoodCD": "310100502430000",
+      "SaleWriteRuleCD": "01",
+      "EstimatedTotalSales": "100.00",
+      "EffectiveMonth": "",
+      "ExpiryMonth": "",
+      "FeeControl": "0",
+      "OpenFare": "1.00",
+      "EstimatePrice": "100.00",
+      "EntryPrice": "1.00",
+      "DTCD": "0110000077",
+      "Class": "中档",
+      "ClassLevel": "05",
+      "BottleCount": 24,
+      "Brand": "雪花",
+      "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+      "Volumes": [
+        {
+          "ProtocolMonth": 1,
+          "NaturalMonth": "202201",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 2,
+          "NaturalMonth": "202202",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 3,
+          "NaturalMonth": "202203",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 4,
+          "NaturalMonth": "202204",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 5,
+          "NaturalMonth": "202205",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 6,
+          "NaturalMonth": "202206",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 7,
+          "NaturalMonth": "202207",
+          "YuguSales": "16"
+        }
+      ]
+    },
+    {
+      "GoodCD": "310100502440000",
+      "SaleWriteRuleCD": "01",
+      "EstimatedTotalSales": 100,
+      "EffectiveMonth": "",
+      "ExpiryMonth": "",
+      "FeeControl": "0",
+      "OpenFare": "1.00",
+      "EstimatePrice": 100,
+      "EntryPrice": "1.00",
+      "DTCD": "0110000077",
+      "Class": "中档",
+      "ClassLevel": "05",
+      "BottleCount": 24,
+      "Brand": "雪花",
+      "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+      "Volumes": [
+        {
+          "ProtocolMonth": 1,
+          "NaturalMonth": "202201",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 2,
+          "NaturalMonth": "202202",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 3,
+          "NaturalMonth": "202203",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 4,
+          "NaturalMonth": "202204",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 5,
+          "NaturalMonth": "202205",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 6,
+          "NaturalMonth": "202206",
+          "YuguSales": "14"
+        },
+        {
+          "ProtocolMonth": 7,
+          "NaturalMonth": "202207",
+          "YuguSales": "16"
+        }
+      ]
+    }
+  ],
+  "costs": {
+    "fee": [
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 1,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 2,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 3,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 4,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 5,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 6,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 7,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "8.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 1,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 2,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 3,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 4,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 5,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 6,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008001",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 7,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "8.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 1,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 2,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 3,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 4,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 5,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 6,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502430000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "ContractMonth": 7,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "8.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 1,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 2,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 3,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 4,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 5,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 6,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "7.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      },
+      {
+        "InvestNumber": "008002",
+        "GoodCD": "310100502440000",
+        "GoodNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "ContractMonth": 7,
+        "GivingWay": "1",
+        "FeeItem": "公司主体操作",
+        "CompanyFee": "8.00",
+        "DtLevel1Fee": "0.00",
+        "DtLevel2Fee": "0.00"
+      }
+    ],
+    "gift": [],
+    "profit": [
+      {
+        "RegionCD": "50000614",
+        "MarketOrgID": "50000665",
+        "BigAreaOrgCD": "50000667",
+        "OfficeOrgCD": "50000674",
+        "StationOrgCD": "50044889",
+        "DTCD": "0110000077",
+        "TmnCD": null,
+        "TmnNm": null,
+        "ProductCD": "310100502430000",
+        "ProductName": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "CharacterCD": "00",
+        "DirectMargin": 1241.504424778761,
+        "SingleAmountDirectMargin": 12.41504424778761,
+        "SingleDirectMargin": 12.41504424778761,
+        "SalesMarginProfit": 1235.110824778761,
+        "SalesProfit": 1229.782824778761,
+        "SingleAmountCost": 1,
+        "SingleCost": 1,
+        "CostBenifitRatio": 1,
+        "BEP": 0,
+        "Agent1stProfit": 0,
+        "Agent2ndProfit": 0,
+        "Agent1stSingleCost": 0,
+        "Agent1stSingleProfit": 0,
+        "Agent2ndSingleCost": 0,
+        "Agent2ndSingleProfit": 0,
+        "TerminalProfitFloor": 0,
+        "TerminalProfitCAP": 0,
+        "TerminalProfitForcast": 10000,
+        "TerminalSingleCost": 1,
+        "ProfitRet": null,
+        "DirectMarginFormula": 13.3,
+        "ProductSingleStd": null,
+        "Income": 0,
+        "TPCalcTax": 1.13,
+        "SingleDirectMarginal": 12.41504424778761,
+        "KLDirectMarginal": 2330.1509474075847,
+        "SingleSalesMarginal": 12.35110824778761,
+        "KLSalesMarginal": 2318.1509474075847,
+        "SingleSalesProfit": 12.29782824778761,
+        "KLSalesProfit": 2308.1509474075847,
+        "GiftAmount": 0,
+        "SingleDirectMarginFormulaDesc": "(名义开票价)-(月保)-(年保)+(预算可变成本（件）)*(13/100+1)-(固化保证金)+(名义开票价)",
+        "SingleDirectMarginFormulaValue": "(1.00)-(0)-(0)+(10.00)*(13/100+1)-(0)+(1.00)",
+        "DirectMarginDesc": "【公司销售边际利润】*(销量（本品）+赠酒量（赠酒）)-【公司承担总随量费用】/(1+税率)-【公司承担总固定费用】/(1+税率)",
+        "DirectMarginValue": "13.3*(100.00+0)-100/1.13-0/1.13"
+      },
+      {
+        "RegionCD": "50000614",
+        "MarketOrgID": "50000665",
+        "BigAreaOrgCD": "50000667",
+        "OfficeOrgCD": "50000674",
+        "StationOrgCD": "50044889",
+        "DTCD": "0110000077",
+        "TmnCD": null,
+        "TmnNm": null,
+        "ProductCD": "310100502440000",
+        "ProductName": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "CharacterCD": "00",
+        "DirectMargin": 1241.504424778761,
+        "SingleAmountDirectMargin": 12.41504424778761,
+        "SingleDirectMargin": 12.41504424778761,
+        "SalesMarginProfit": 1235.110824778761,
+        "SalesProfit": 1229.782824778761,
+        "SingleAmountCost": 1,
+        "SingleCost": 1,
+        "CostBenifitRatio": 1,
+        "BEP": 0,
+        "Agent1stProfit": 0,
+        "Agent2ndProfit": 0,
+        "Agent1stSingleCost": 0,
+        "Agent1stSingleProfit": 0,
+        "Agent2ndSingleCost": 0,
+        "Agent2ndSingleProfit": 0,
+        "TerminalProfitFloor": 0,
+        "TerminalProfitCAP": 0,
+        "TerminalProfitForcast": 10000,
+        "TerminalSingleCost": 1,
+        "ProfitRet": null,
+        "DirectMarginFormula": 13.3,
+        "ProductSingleStd": null,
+        "Income": 0,
+        "TPCalcTax": 1.13,
+        "SingleDirectMarginal": 12.41504424778761,
+        "KLDirectMarginal": 2330.1509474075847,
+        "SingleSalesMarginal": 12.35110824778761,
+        "KLSalesMarginal": 2318.1509474075847,
+        "SingleSalesProfit": 12.29782824778761,
+        "KLSalesProfit": 2308.1509474075847,
+        "GiftAmount": 0,
+        "SingleDirectMarginFormulaDesc": "(名义开票价)-(月保)-(年保)+(预算可变成本（件）)*(13/100+1)-(固化保证金)+(名义开票价)",
+        "SingleDirectMarginFormulaValue": "(1.00)-(0)-(0)+(10.00)*(13/100+1)-(0)+(1.00)",
+        "DirectMarginDesc": "【公司销售边际利润】*(销量（本品）+赠酒量（赠酒）)-【公司承担总随量费用】/(1+税率)-【公司承担总固定费用】/(1+税率)",
+        "DirectMarginValue": "13.3*(100+0)-100/1.13-0/1.13"
+      },
+      {
+        "RegionCD": "50000614",
+        "MarketOrgID": "50000665",
+        "BigAreaOrgCD": "50000667",
+        "OfficeOrgCD": "50000674",
+        "StationOrgCD": "50044889",
+        "DTCD": "0110000077",
+        "TmnCD": null,
+        "TmnNm": null,
+        "ProductCD": "--",
+        "ProductName": null,
+        "CharacterCD": null,
+        "DirectMargin": 2483.008849557522,
+        "SingleAmountDirectMargin": 12.41504424778761,
+        "SingleDirectMargin": 12.41504424778761,
+        "SalesMarginProfit": 2470.221649557522,
+        "SalesProfit": 2459.565649557522,
+        "SingleAmountCost": 1,
+        "SingleCost": 1,
+        "CostBenifitRatio": 1,
+        "BEP": 0,
+        "Agent1stProfit": 0,
+        "Agent2ndProfit": 0,
+        "Agent1stSingleCost": 0,
+        "Agent1stSingleProfit": 0,
+        "Agent2ndSingleCost": 0,
+        "Agent2ndSingleProfit": 0,
+        "TerminalProfitFloor": 0,
+        "TerminalProfitCAP": 0,
+        "TerminalProfitForcast": 20000,
+        "TerminalSingleCost": 1,
+        "ProfitRet": null,
+        "DirectMarginFormula": 0,
+        "ProductSingleStd": null,
+        "Income": 0,
+        "TPCalcTax": 1.13,
+        "SingleDirectMarginal": 12.41504424778761,
+        "KLDirectMarginal": 2330.1509474075847,
+        "SingleSalesMarginal": 12.35110824778761,
+        "KLSalesMarginal": 2318.1509474075847,
+        "SingleSalesProfit": 12.29782824778761,
+        "KLSalesProfit": 2308.1509474075847,
+        "GiftAmount": 0,
+        "SingleDirectMarginFormulaDesc": null,
+        "SingleDirectMarginFormulaValue": null,
+        "DirectMarginDesc": null,
+        "DirectMarginValue": null
+      }
+    ],
+    "CompetitorProfit": [
+      {
+        "ID": "tr9",
+        "EntryPrice": "1.00",
+        "Sales": "100.00",
+        "TerminalEstimatePrice": "100.00",
+        "UnitEstimatePrice": "4.17",
+        "Class": "中档",
+        "Brand": "雪花",
+        "ProductNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶(310100502430000)",
+        "Type": "本品",
+        "SLCost": 100,
+        "GDCost": 0,
+        "SLGiftAmount": 0,
+        "GDGiftAmount": 0,
+        "TerminalTotalProfit": 20000
+      },
+      {
+        "ID": "tr10",
+        "EntryPrice": "1.00",
+        "Sales": 100,
+        "TerminalEstimatePrice": 100,
+        "UnitEstimatePrice": "4.17",
+        "Class": "中档",
+        "Brand": "雪花",
+        "ProductNm": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱(310100502440000)",
+        "Type": "本品",
+        "SLCost": 100,
+        "GDCost": 0,
+        "SLGiftAmount": 0,
+        "GDGiftAmount": 0,
+        "TerminalTotalProfit": 0
+      }
+    ]
+  },
+  "warning": [],
+  "addAttachments": [],
+  "existsAttachments": [],
+  "deleteAttachments": []
+}

@@ -1,0 +1,112 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+@*兑付信息-详情*@
+<CascadingValue Value="@ParameterModel" Name="ParameterModel" IsFixed>
+    <MudTable Items="@Items"
+              Hover="true"
+              Breakpoint="Breakpoint.None"
+              Dense="@true"
+              Elevation="1">
+        <ColGroup>
+            <col />
+            <col style="width:100px" />
+            <col />
+            <col />
+        </ColGroup>
+        <HeaderContent>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">产品信息</MudTh>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">标准基数</MudTh>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">兑付标准</MudTh>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">承担方式</MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+            @*产品信息*@
+            <MudTd DataLabel="DetailGoodCD" Class="pa-2 gap-2">
+                @foreach (var p in context.DetailGoods)
+                {
+                    <MudTextField T="string"
+                              Value="@p.Value"
+                              Variant="Variant.Outlined"
+                              ReadOnly="true"
+                              Margin="Margin.Dense" />
+                }
+            </MudTd>
+            @*标准基数*@
+            <MudTd Class="pa-2 gap-2" DataLabel="BaseNum">
+
+                <MudForm Model="@context">
+                    <MudTextField @bind-Value="context.BaseNum"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense"
+                                  Disabled="@(Model.GivingWayType == GEnum.InvestPresentMode.固定给酒)"
+                                  For="(() => context.BaseNum)" />
+                </MudForm>
+            </MudTd>
+            @*兑付标准*@
+            <MudTd Class="pa-2 gap-2" DataLabel="Fee">
+
+                @if (Model.GivingWayType == GEnum.InvestPresentMode.随量费用)
+                {
+                    <Free_Card PData="@context" />
+                }
+                else if (Model.GivingWayType == GEnum.InvestPresentMode.促销用酒)
+                {
+                    <Free_Card2 PData="@context" />
+                }
+                else if (Model.GivingWayType == GEnum.InvestPresentMode.随量返点)
+                {
+                    <Free_Card3 PData="@context" />
+                }
+                else if (Model.GivingWayType == GEnum.InvestPresentMode.固定给钱)
+                {
+                    <Free_Card4 PData="@context" />
+                }
+                else if (Model.GivingWayType == GEnum.InvestPresentMode.固定给酒)
+                {
+                    <Free_Card5 PData="@context" />
+                }
+
+            </MudTd>
+            @*承担方式*@
+            <MudTd Class="pa-2 gap-2" DataLabel="EntryPrice">
+                <BearWay_Card PData="@context" Model="@Model" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</CascadingValue>
+@code
+{
+    [Parameter]
+    public string Title { get; set; }
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+    [Parameter]
+    public ProtocolBaseFydlzhDatum Model { get; set; }
+
+    private List<ProtocolBaseDetail> _items;
+    [Parameter]
+    public List<ProtocolBaseDetail> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+}

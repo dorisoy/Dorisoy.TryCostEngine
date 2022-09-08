@@ -1,0 +1,82 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+<MudTable Items="@Items"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+    <ColGroup>
+        <col />
+        <col />
+        <col />
+    </ColGroup>
+    <HeaderContent>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入计算方式</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">经销商投入-G</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">经销商投入-C</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        @*投入计算方式*@
+        <MudTd Class="pa-2 gap-2" DataLabel="No">
+            <MudForm Model="@context">
+                <MudSelect @bind-Value="context.FillWayType"
+                           For="(() => context.FillWayType)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           ReadOnly="true"
+                           Margin="Margin.Dense">
+                    @foreach (GEnum.FillWayMode item in Enum.GetValues(typeof(GEnum.FillWayMode)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudForm>
+        </MudTd>
+        @*经销商投入-G*@
+        <MudTd Class="pa-2 gap-2" DataLabel="FeeCompany">
+            <MudForm Model="@context">
+                <MudTextField @bind-Value="context.FeeCompany"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudForm>
+        </MudTd>
+        @*经销商投入-C*@
+        <MudTd Class="pa-2 gap-2" DataLabel="FeeDistributor">
+            <MudForm Model="@context">
+                <MudTextField @bind-Value="context.FeeDistributor"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudForm>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code
+{
+    public List<ProtocolBaseBearway> Items { get; set; }
+
+    [Parameter]
+    public ProtocolBaseDetail PData { get; set; }
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+    [Parameter]
+    public ProtocolBaseFydlzhDatum Model { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        //初始化
+        if (PData != null && PData.BearWay.Any())
+        {
+            Items = PData.BearWay;
+        }
+    }
+}

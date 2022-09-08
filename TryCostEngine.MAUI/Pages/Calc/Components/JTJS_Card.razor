@@ -1,0 +1,31 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+
+<MudTabs Elevation="1"
+         Rounded="false"
+         ApplyEffectsToContainer="true"
+         PanelClass="pa-4"
+         MaxHeight="200"
+         Style="width:1000px"
+         Border="true">
+    <MudTabPanel Icon="@Icons.Outlined.SettingsInputHdmi" Text="输入信息">
+        <MudText Align="Align.Left"><b>数据：</b> 产品信息、预估销量、协议期、保量信息、协议达量标准、投入标准、套装规则、是否循环、兑付方式.</MudText>
+        <MudText Align="Align.Left"><b>条件：</b> 保量与否、达量与否.</MudText>
+        <MudText Align="Align.Left"><b>数据：</b> 赠酒结算单价.</MudText>
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Outlined.Rule" Text="计算引擎规则输出">
+        <MudText Align="Align.Left"><b>计算可用销量：</b></MudText>
+        <MudText Align="Align.Left"><b>计算可用套装数：</b></MudText>
+        <MudText Align="Align.Left"><b>达量次数：</b></MudText>
+        <MudText Align="Align.Left"><b>循环次数：</b>（单次时循环次数为1）</MudText>
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Outlined.Output" Text="计算引擎输出">
+        <MudText Align="Align.Left"><b>随量给钱：</b>单箱标准*实际销量</MudText>
+        <MudText Align="Align.Left"><b>随量给酒：</b>[实际销量/兑付基数]*赠酒结算单价</MudText>
+        <MudText Align="Align.Left"><b>固定给钱：</b></MudText>
+        <MudText Align="Align.Left"><b>固定给酒：</b>赠酒量*赠酒结算单价</MudText>
+    </MudTabPanel>
+</MudTabs>

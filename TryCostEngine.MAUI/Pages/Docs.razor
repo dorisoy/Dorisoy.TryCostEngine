@@ -1,0 +1,173 @@
+﻿@page "/docs"
+@page "/docs/overview"
+
+@layout DocsLayout
+
+<DocsPage DisplayFooter="true">
+    <DocsPageHeader Title="TryCostEngine" SubTitle="基于TPM.CostEngine的营销成本费用计算引擎">
+        <SpecialHeaderContent>
+            <MudText Typo="Typo.h2" Inline="true" Class="docs-title">Try</MudText>
+            <MudText Typo="Typo.h2" Inline="true" Color="Color.Primary" Class="docs-title">CostEngine</MudText>
+            <MudText Typo="Typo.subtitle1" Class="docs-title-description">基于TPM.CostEngine的营销成本费用计算引擎.</MudText>
+        </SpecialHeaderContent>
+    </DocsPageHeader>
+@*
+    <MudCard>
+        <MudCardMedia Image="images/framework.png" Height="1000" />
+        <MudCardContent>
+            <MudText Typo="Typo.h6">应用架构</MudText>
+        </MudCardContent>
+    </MudCard>
+*@
+    <MudText Typo="Typo.h5">应用架构</MudText>
+    <MudImage ObjectFit="ObjectFit.Cover" Height="1000" Src="images/framework.png" Alt="应用架构"  Elevation="0" Class="rounded-lg"/>
+
+    <DocsPageContent>
+        <DocsPageSection>
+            <MudGrid>
+
+                @*协议终端立项模型*@
+                <MudItem xs="12" md="3" Class="mt-16">
+                    <div class="docs-sticky-info explore-text">
+                        <MudText Typo="Typo.h5">协议终端立项模型</MudText>
+                        <MudText Typo="Typo.subtitle1">随量, 固定, 分月达量…</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" md="9" Class="mt-16">
+                    <div class="explore-mudblazor-items">
+                        <DocsExploreCard Title="随量非组合" Link="/protocol/slfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="随量组合" Link="/protocol/slzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="固定给钱" Link="/protocol/gdgqTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="固定给酒" Link="/protocol/gdgjTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="分月达量非组合" Link="/protocol/fydlfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="分月达量组合" Link="/protocol/fydlzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="累计达量非组合" Link="/protocol/ljdlfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="累计达量组合" Link="/protocol/ljdlzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+
+                        <DocsExploreCard Title="梯度非组合" Link="/protocol/tdfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="梯度组合" Link="/protocol/tdzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                    </div>
+                </MudItem>
+
+
+                @*销售政策立项模型*@
+                <MudItem xs="12" md="3" Class="mt-16">
+                    <div class="docs-sticky-info explore-text">
+                        <MudText Typo="Typo.h5">销售政策立项模型</MudText>
+                        <MudText Typo="Typo.subtitle1">随量, 常规买赠, 梯度买赠…</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" md="9" Class="mt-16">
+                    <div class="explore-mudblazor-items">
+                        <DocsExploreCard Title="随量" Link="/protocol/slfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="常规买赠" Link="/protocol/slzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="梯度买赠" Link="/protocol/gdgqTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="组合买赠" Link="/protocol/gdgjTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="有奖促销" Link="/protocol/fydlfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="陈列" Link="/protocol/fydlzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="补贴" Link="/protocol/ljdlfzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                        <DocsExploreCard Title="通用" Link="/protocol/ljdlzhTR">
+                            <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                                <MudIcon Icon="@Icons.Custom.Brands.Calculator" Color="Color.Primary" Size="Size.Large" />
+                            </MudPaper>
+                        </DocsExploreCard>
+
+                    </div>
+                </MudItem>
+
+
+            </MudGrid>
+        </DocsPageSection>
+    </DocsPageContent>
+</DocsPage>
+
+@code {
+
+    [Inject] IMenuService MenuService { get; set; }
+
+}

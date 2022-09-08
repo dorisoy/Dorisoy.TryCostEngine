@@ -1,0 +1,65 @@
+﻿@page "/"
+
+<MudLayout Class="try-costengine-index">
+    <MudMainContent>
+        <MudContainer Class="my-10" MaxWidth="MaxWidth.Large">
+            <MudGrid Spacing="8">
+                <MudItem xs="12">
+                    <div>
+                        <MudText Typo="Typo.h1" Align="Align.Center">
+                            Try<MudText Typo="Typo.h1" Inline="true" Color="Color.Primary">CostEngine</MudText>
+                        </MudText>
+                        <MudText Typo="Typo.h4" Align="Align.Center" Class="mud-text-secondary ml-2 my-5">
+                            基于 <MudLink Typo="Typo.h4">TPM.CostEngine</MudLink> 引擎动态构建费用模型 @Version
+                        </MudText>
+                    </div>
+                </MudItem>
+                <MudPaper Class="d-flex justify-center flex-grow-1 gap-4 mt-10" Elevation="0">
+                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.DocumentScanner" Color="Color.Info" Size="Size.Large" DisableElevation="true" Class="px-6" Link="/docs">向导</MudButton>
+                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.ArrowCircleRight" Color="Color.Primary" Size="Size.Large" DisableElevation="true" Class="px-6" OnClick="@(() => Snackbar.Add("离线模式下不可用！"))">模拟器</MudButton>
+                </MudPaper>
+                <MudItem xs="12" Class="my-8">
+                    <MudGrid Spacing="5" Class="my-8">
+                        <MudItem xs="12" sm="4">
+                            <div class="d-flex justify-center">
+                                <MudIcon Color="Color.Primary" Icon="@Icons.Outlined.SafetyCheck" Class="try-index-landing-icons" Style="height: 96px; width: 96px;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Primary" Class="mt-8 mb-3" Style="font-weight:500;">高效验证降低运算差错</MudText>
+                            <MudText Typo="Typo.h6" Align="Align.Center" Class="mud-text-secondary">
+                                直观可视化自定义模型代码片段，动态参数配置，模拟费用投入计算，实时编译运算结果
+                            </MudText>
+                        </MudItem>
+                        <MudItem xs="12" sm="4">
+                            <div class="d-flex justify-center">
+                                <MudIcon Color="Color.Primary" Icon="@Icons.Outlined.DeveloperMode" Class="try-index-landing-icons" Style="height: 96px; width: 96px;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Primary" Class="mt-8 mb-3" Style="font-weight:500;">为领域专业而生</MudText>
+                            <MudText Typo="Typo.h6" Align="Align.Center" Class="mud-text-secondary">
+                                TryCostEngine 在这里为您提供模拟业务场景、验证实验、预测模拟费用发生，获得费用投入评估和学习营销SCP理论。
+                            </MudText>
+                        </MudItem>
+                        <MudItem xs="12" sm="4">
+                            <div class="d-flex justify-center">
+                                <MudIcon Color="Color.Primary" Icon="@Icons.Outlined.SupervisedUserCircle" Class="try-index-landing-icons" Style="height: 96px; width: 96px;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Primary" Class="mt-8 mb-3" Style="font-weight:500;">团队开发协助</MudText>
+                            <MudText Typo="Typo.h6" Align="Align.Center" Class="mud-text-secondary">
+                                适应业务频繁发生变更，开发人员在编写逻辑遇到问题时？BA可以帮助他们并向他们发送代码片段链接或一起调试流程。
+                            </MudText>
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+        <MudDivider Class="my-4" />
+        <MudContainer>
+            <MudText Align="Align.Center" Typo="Typo.body2" Class="mb-8 mt-2">
+                <MudLink Typo="Typo.body2" Href="#" Target="_blank">SCP.TPM v1.0.</MudLink>
+            </MudText>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    string Version { get { var v = typeof(MudText).Assembly.GetName().Version; return $"v1.0.0"; } }
+}

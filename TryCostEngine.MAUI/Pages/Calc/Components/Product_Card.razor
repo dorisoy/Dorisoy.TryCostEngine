@@ -1,0 +1,284 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+@using System.Collections.Generic
+
+@using System
+@using System.Linq
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Components
+@using TryCostEngine.MAUI.Pages.Calc
+@using Newtonsoft.Json
+@using Microsoft.JSInterop
+
+@inject IDialogService DialogService
+
+@*受益产品*@
+<MudGrid>
+    <MudItem xs="7">
+
+        @*列表*@
+        <MudTable Items="@Items"
+                  Hover="true"
+                  Breakpoint="Breakpoint.None"
+                  Dense="@true"
+                  Elevation="1">
+
+            <ColGroup>
+                <col />
+                <col style="width: 80px;" />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col style="width: 60px;" />
+            </ColGroup>
+
+            <HeaderContent>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">产品信息</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">档次</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">进店价</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">终端零售价</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">销量填报规则</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">销量合计(件）</MudTh>
+                <MudTh Style="text-align:center" Class="mud-all-table-header-row">操作</MudTh>
+            </HeaderContent>
+
+            <RowTemplate>
+                @*产品信息*@
+                <MudTd DataLabel="GoodNm" Class="pa-2 gap-2">
+                    <MudForm Model="@context">
+                        <MudAutocomplete T="string"
+                                         Variant="Variant.Outlined"
+                                         @bind-Value="context.GoodNm"
+                                         ResetValueOnEmptyText="@resetValueOnEmptyText"
+                                         Margin="Margin.Dense"
+                                         CoerceText="@coerceText"
+                                         CoerceValue="@coerceValue"
+                                         AdornmentIcon="@Icons.Material.Filled.Search"
+                                         AdornmentColor="Color.Primary" />
+
+                    </MudForm>
+                </MudTd>
+                @*档次*@
+                <MudTd Class="pa-2 gap-2" DataLabel="Class">
+                    <MudForm Model="@context">
+                        <MudTextField @bind-Value="context.Class"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      For="(() => context.Class)" />
+                    </MudForm>
+                </MudTd>
+                @*进店价*@
+                <MudTd Class="pa-2 gap-2" DataLabel="EstimatedTotalSales">
+                    <MudForm Model="@context">
+                        <MudNumericField @bind-Value="context.EstimatedTotalSales"
+                                         Variant="Variant.Outlined"
+                                         Margin="Margin.Dense"
+                                         For="(() => context.EstimatedTotalSales)" />
+                    </MudForm>
+                </MudTd>
+                @*终端零售价*@
+                <MudTd Class="pa-2 gap-2" DataLabel="EntryPrice">
+                    <MudForm Model="@context">
+                        <MudNumericField @bind-Value="context.EntryPrice"
+                                         Variant="Variant.Outlined"
+                                         Margin="Margin.Dense"
+                                         For="(() => context.EntryPrice)" />
+                    </MudForm>
+                </MudTd>
+                @*销量填报规则*@
+                <MudTd Class="pa-2 gap-2" DataLabel="SRCD">
+                    <MudForm Model="@context">
+                        @*OnClose="@(()=>OpenSRCDDialog(context))"*@
+                        <MudSelect @bind-Value="context.SaleWriteRuleCDType"
+                                   For="(() => context.SaleWriteRuleCDType)"
+                                   AnchorOrigin="Origin.BottomCenter"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense"
+                                   SelectedValuesChanged="@((IEnumerable<SaleWriteRuleCDType> t)=>OnSelectedValuesChanged(t,context))"
+                                   Clearable>
+                            @foreach (SaleWriteRuleCDType item in Enum.GetValues(typeof(SaleWriteRuleCDType)))
+                            {
+                                <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                            }
+                        </MudSelect>
+
+                    </MudForm>
+                </MudTd>
+                @*销量合计*@
+                <MudTd Class="pa-2 gap-2" DataLabel="EstimatedTotalSales">
+                    <MudForm Model="@context">
+                        <MudNumericField @bind-Value="context.EstimatedTotalSales"
+                                         Variant="Variant.Outlined"
+                                         Margin="Margin.Dense"
+                                         For="(() => context.EstimatedTotalSales)" />
+                    </MudForm>
+                </MudTd>
+                @*操作*@
+                <MudTd Class="pa-2 gap-2 justify-center align-center">
+                    <MudForm Model="@context">
+                        <MudButtonGroup Variant="Variant.Filled">
+                            @*<MudIconButton Icon="@Icons.Filled.Add"
+                            Color="Color.Primary"
+                            OnClick="AddGood" />*@
+
+                            <MudIconButton Icon="@Icons.Filled.Delete"
+                                           Color="Color.Primary"
+                                           OnClick="@(()=>RemoveGood(context.GUID))" />
+                        </MudButtonGroup>
+                    </MudForm>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+
+    </MudItem>
+    <MudItem xs="5">
+
+        @*选择*@
+        <MudAutocomplete T="SelectListModel"
+                         Class="mb-4"
+                         Variant="Variant.Outlined"
+                         SearchFunc="@SearchrPoducts"
+                         ToStringFunc="@(e=> { return e?.Text; })"
+                         Placeholder="编码/关键字搜索商品..."
+                         ResetValueOnEmptyText="@resetValueOnEmptyText"
+                         Margin="Margin.Dense"
+                         CoerceText="@coerceText"
+                         CoerceValue="@coerceValue"
+                         AdornmentIcon="@Icons.Material.Filled.Search"
+                         AdornmentColor="Color.Primary" />
+        @*
+        <MudAutocomplete @bind-Value="context.Select"
+        Variant="Variant.Outlined"
+        SearchFunc="@SearchrPoducts"
+        Margin="Margin.Dense"
+        ToStringFunc="@(e=> { return e?.Text; })"
+        AdornmentIcon="@Icons.Material.Filled.Search"
+        AdornmentColor="Color.Primary" />
+        *@
+        <MudPaper Class="gap-x-8 gap-y-5 d-flex flex-wrap" Elevation="0">
+            @foreach (var p in products)
+            {
+                <ExploreCard Product="@p" SelectedCallback="@SelectedAdd">
+                    <MudPaper Elevation="25" Class="d-flex justify-center align-center rounded-circle pa-4">
+                        <MudAvatar Image="images/14460770.jpg" Alt="@p.Text" />
+                    </MudPaper>
+                </ExploreCard>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
+    private IEnumerable<SaleWriteRuleCDType> options { get; set; }
+
+    private List<SelectListModel> products;
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+    private List<ProtocolBaseGoodinfo> _items;
+
+    [Parameter]
+    public List<ProtocolBaseGoodinfo> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (ParameterModel.Products.Any())
+            products = ParameterModel.Products.ToList();
+    }
+
+
+    private async Task<IEnumerable<SelectListModel>> SearchrPoducts(string value)
+    {
+        await Task.Delay(5);
+
+        if (string.IsNullOrEmpty(value))
+            return new SelectListModel[0];
+
+        return products.Where(x => x.Text.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+
+    private void RemoveGood(Guid gUID)
+    {
+        if (Items.Count <= 1)
+        {
+            Snackbar.Add("已经是最后一项了!");
+            return;
+        }
+        var find = Items.Where(s => s.GUID == gUID).FirstOrDefault();
+        if (find != null)
+        {
+            find.Selected = false;
+            Items.Remove(find);
+        }
+    }
+
+    private async Task SelectedAdd(SelectListModel p)
+    {
+        try
+        {
+            var find = Items.Where(s => s.GoodCD == p.Value).FirstOrDefault();
+            if (find != null)
+            {
+                await DialogService.ShowMessageBox("提示!", $"商品 {p.Text} 已经添加了！", yesText: "确定");
+                return;
+            }
+
+             //"Data": "0.00|0111106007|0"
+            var pd = p.Data.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            var product = new ProtocolBaseGoodinfo()
+                {
+                    GoodCD = p.Value,
+                    GoodNm = p.Text,
+                    EstimatePrice = pd[0],
+                    EntryPrice = pd[2],
+                    Class = "中档"
+                };
+
+            Items.Add(product);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, MudBlazor.Severity.Error);
+        }
+    }
+
+    //销量填报规则
+    private void OnSelectedValuesChanged(IEnumerable<SaleWriteRuleCDType> values, ProtocolBaseGoodinfo context)
+    {
+        var option = new DialogOptions()
+            {
+                FullWidth = true,
+                MaxWidth = MaxWidth.Large,
+                CloseButton = true,
+                DisableBackdropClick = true,
+                CloseOnEscapeKey = true
+            };
+
+        var parameters = new DialogParameters();
+        parameters.Add("Product", context);
+        DialogService.Show<SRCD_Card>(EnumExt.GetDisplayText(context.SaleWriteRuleCDType), parameters, option);
+    }
+}

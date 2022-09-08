@@ -1,0 +1,18 @@
+﻿@using System.Net
+@using System.Text
+
+<MudDialog DisableSidePadding="true"  Style="width:150px;height:150px">
+    <DialogContent>
+        <MudContainer Class="d-flex align-center align-content-center justify-center">
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" Class="align-self-center"></MudProgressCircular>
+        </MudContainer>
+    </DialogContent>
+</MudDialog>
+
+@code 
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+}

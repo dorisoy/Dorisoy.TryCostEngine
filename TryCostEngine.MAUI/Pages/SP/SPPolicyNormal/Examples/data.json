@@ -1,0 +1,176 @@
+TemplateCD: 00000002
+PlanID: 1482804
+ID: 1411671
+AllowDelayDays: 29
+IsAllowPreMonth: 0
+CreatedOnStr: 2022/7/25 14:06:18
+PolicyCD: PZC22000206428
+PolicyTitle: tongy123
+Level1CD: FSP00001
+RegionCD: 50000614
+Level2CD: SSP00001
+TypeCD: 1
+StartOn: 2022-07-25
+EndOn: 2022-11-25
+LineCD: ZSNM01
+PolicyObjectCode: 00000001
+ActivityPurposeCode: 0
+ChargeControlMode: 1
+IsXYZDUsed: 1
+BillingMethodCode: 001
+IsNeedPredictSaleCount: 1
+IsSingleBoxClosingCost: 0
+IsNeedDT: 1
+RelatePolicyID: 
+RelatePolicyCD: 
+IsNeedAdvance: 0
+IsNeedSystem: 0
+ProductSelectionDimension: 0
+SummaryOrgType: 0
+PolicyDesc: fsdfafdsf
+SDTList[0][RegionCD]: 
+SDTList[0][ID]: 1440180
+SDTList[0][ProtocolBasicInfoID]: 0
+SDTList[0][DTCD]: 0110000077
+SDTList[0][SysNum]: 
+SDTList[0][TMNNum]: 10
+SDTList[0][MiniOrgCD]: 50044889
+SPList[0][RegionCD]: 
+SPList[0][ID]: 1502612
+SPList[0][ProtocolBasicInfoID]: 0
+SPList[0][OrgCD]: 
+SPList[0][DTCD]: 
+SPList[0][ProductCD]: 310100502430000
+SPList[0][CharacterCD]: 00
+SPList[0][ErpItemNumber]: 31010050243000000
+SPList[0][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶
+SPList[1][RegionCD]: 
+SPList[1][ID]: 1502613
+SPList[1][ProtocolBasicInfoID]: 0
+SPList[1][OrgCD]: 
+SPList[1][DTCD]: 
+SPList[1][ProductCD]: 310100502440000
+SPList[1][CharacterCD]: 00
+SPList[1][ErpItemNumber]: 31010050244000000
+SPList[1][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱
+SOrgList[0][RegionCD]: 
+SOrgList[0][ID]: 1528197
+SOrgList[0][ProtocolBasicInfoID]: 0
+SOrgList[0][MarketOrg]: 50000665
+SOrgList[0][BigAreaOrg]: 50000667
+SOrgList[0][OfficeOrg]: 50000674
+SOrgList[0][StationOrg]: 50044889
+SPreSalesList[0][RegionCD]: 
+SPreSalesList[0][ID]: 1468041
+SPreSalesList[0][ProtocolBasicInfoID]: 0
+SPreSalesList[0][DTCD]: 0110000077
+SPreSalesList[0][TMNCD]: 
+SPreSalesList[0][ProductCD]: 310100502430000
+SPreSalesList[0][SysNum]: 
+SPreSalesList[0][EstimateSalesCount]: 25
+SPreSalesList[0][CharacterCD]: 00
+SPreSalesList[0][OrgCD]: 
+SPreSalesList[0][MSSList][0][Month]: 202207
+SPreSalesList[0][MSSList][0][SalesCount]: 5
+SPreSalesList[0][MSSList][1][Month]: 202208
+SPreSalesList[0][MSSList][1][SalesCount]: 5
+SPreSalesList[0][MSSList][2][Month]: 202209
+SPreSalesList[0][MSSList][2][SalesCount]: 5
+SPreSalesList[0][MSSList][3][Month]: 202210
+SPreSalesList[0][MSSList][3][SalesCount]: 5
+SPreSalesList[0][MSSList][4][Month]: 202211
+SPreSalesList[0][MSSList][4][SalesCount]: 5
+SPreSalesList[0][ErpItemNumber]: 31010050243000000
+SPreSalesList[0][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶
+SPreSalesList[1][RegionCD]: 
+SPreSalesList[1][ID]: 1468042
+SPreSalesList[1][ProtocolBasicInfoID]: 0
+SPreSalesList[1][DTCD]: 0110000077
+SPreSalesList[1][TMNCD]: 
+SPreSalesList[1][ProductCD]: 310100502440000
+SPreSalesList[1][SysNum]: 
+SPreSalesList[1][EstimateSalesCount]: 25
+SPreSalesList[1][CharacterCD]: 00
+SPreSalesList[1][OrgCD]: 
+SPreSalesList[1][MSSList][0][Month]: 202207
+SPreSalesList[1][MSSList][0][SalesCount]: 5
+SPreSalesList[1][MSSList][1][Month]: 202208
+SPreSalesList[1][MSSList][1][SalesCount]: 5
+SPreSalesList[1][MSSList][2][Month]: 202209
+SPreSalesList[1][MSSList][2][SalesCount]: 5
+SPreSalesList[1][MSSList][3][Month]: 202210
+SPreSalesList[1][MSSList][3][SalesCount]: 5
+SPreSalesList[1][MSSList][4][Month]: 202211
+SPreSalesList[1][MSSList][4][SalesCount]: 5
+SPreSalesList[1][ErpItemNumber]: 31010050244000000
+SPreSalesList[1][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱
+SPreCostList[0][RegionCD]: 
+SPreCostList[0][ID]: 1618655
+SPreCostList[0][ProtocolBasicInfoID]: 0
+SPreCostList[0][DTCD]: 0110000077
+SPreCostList[0][TMNCD]: 
+SPreCostList[0][ProductCD]: 310100502430000
+SPreCostList[0][SysNum]: 
+SPreCostList[0][TotalCost]: 10
+SPreCostList[0][CompanyRate]: 1
+SPreCostList[0][CompanyTotalCost]: 10
+SPreCostList[0][CharacterCD]: 00
+SPreCostList[0][OrgCD]: 
+SPreCostList[0][MSCList][0][Month]: 202207
+SPreCostList[0][MSCList][0][Cost]: 2
+SPreCostList[0][MSCList][0][TotalCost]: 2
+SPreCostList[0][MSCList][0][ZJCost]: 0
+SPreCostList[0][MSCList][1][Month]: 202208
+SPreCostList[0][MSCList][1][Cost]: 2
+SPreCostList[0][MSCList][1][TotalCost]: 2
+SPreCostList[0][MSCList][1][ZJCost]: 0
+SPreCostList[0][MSCList][2][Month]: 202209
+SPreCostList[0][MSCList][2][Cost]: 2
+SPreCostList[0][MSCList][2][TotalCost]: 2
+SPreCostList[0][MSCList][2][ZJCost]: 0
+SPreCostList[0][MSCList][3][Month]: 202210
+SPreCostList[0][MSCList][3][Cost]: 2
+SPreCostList[0][MSCList][3][TotalCost]: 2
+SPreCostList[0][MSCList][3][ZJCost]: 0
+SPreCostList[0][MSCList][4][Month]: 202211
+SPreCostList[0][MSCList][4][Cost]: 2
+SPreCostList[0][MSCList][4][TotalCost]: 2
+SPreCostList[0][MSCList][4][ZJCost]: 0
+SPreCostList[0][ErpItemNumber]: 31010050243000000
+SPreCostList[0][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶
+SPreCostList[0][ZJTotalCost]: 0
+SPreCostList[1][RegionCD]: 
+SPreCostList[1][ID]: 1618656
+SPreCostList[1][ProtocolBasicInfoID]: 0
+SPreCostList[1][DTCD]: 0110000077
+SPreCostList[1][TMNCD]: 
+SPreCostList[1][ProductCD]: 310100502440000
+SPreCostList[1][SysNum]: 
+SPreCostList[1][TotalCost]: 10
+SPreCostList[1][CompanyRate]: 1
+SPreCostList[1][CompanyTotalCost]: 10
+SPreCostList[1][CharacterCD]: 00
+SPreCostList[1][OrgCD]: 
+SPreCostList[1][MSCList][0][Month]: 202207
+SPreCostList[1][MSCList][0][Cost]: 2
+SPreCostList[1][MSCList][0][TotalCost]: 2
+SPreCostList[1][MSCList][0][ZJCost]: 0
+SPreCostList[1][MSCList][1][Month]: 202208
+SPreCostList[1][MSCList][1][Cost]: 2
+SPreCostList[1][MSCList][1][TotalCost]: 2
+SPreCostList[1][MSCList][1][ZJCost]: 0
+SPreCostList[1][MSCList][2][Month]: 202209
+SPreCostList[1][MSCList][2][Cost]: 2
+SPreCostList[1][MSCList][2][TotalCost]: 2
+SPreCostList[1][MSCList][2][ZJCost]: 0
+SPreCostList[1][MSCList][3][Month]: 202210
+SPreCostList[1][MSCList][3][Cost]: 2
+SPreCostList[1][MSCList][3][TotalCost]: 2
+SPreCostList[1][MSCList][3][ZJCost]: 0
+SPreCostList[1][MSCList][4][Month]: 202211
+SPreCostList[1][MSCList][4][Cost]: 2
+SPreCostList[1][MSCList][4][TotalCost]: 2
+SPreCostList[1][MSCList][4][ZJCost]: 0
+SPreCostList[1][ErpItemNumber]: 31010050244000000
+SPreCostList[1][ErpItemDesc]: 雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱
+SPreCostList[1][ZJTotalCost]: 0

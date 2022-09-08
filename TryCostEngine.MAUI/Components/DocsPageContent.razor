@@ -1,0 +1,8 @@
+﻿
+<div class="docs-page-content" style="border:1px #eee solid;padding:0px 20px 20px 20px">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

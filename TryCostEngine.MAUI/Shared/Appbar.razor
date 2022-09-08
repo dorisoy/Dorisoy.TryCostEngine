@@ -1,0 +1,43 @@
+﻿
+<NavLink ActiveClass="d-flex me-4" href="/">
+    <MudText Color="Color.Inherit" Typo="Typo.h5" Class="docs-brand-text">TryCostEngine</MudText>
+</NavLink>
+<MudButton Href="/docs" StartIcon="@Icons.Filled.Api"
+           Variant="Variant.Filled"
+           Color="Color.Info"
+           Size="Size.Small"
+           Class="mr-4">API文档</MudButton>
+
+<MudButton Href="/snippet"
+           StartIcon="@Icons.Custom.Brands.Calculator"
+           Color="Color.Secondary"
+           Variant="Variant.Filled"
+           Size="Size.Small"
+           Class="mr-4">模拟计算</MudButton>
+
+<MudSpacer />
+<AppbarButtons />
+<MudTooltip Duration="1000" Text="GitHub">
+    <MudIconButton Href="" Target="_blank" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" />
+</MudTooltip>
+
+<MudDialog @bind-IsVisible="_searchDialogOpen" Options="_dialogOptions" Class="docs-gray-bg" ClassContent="docs-mobile-dialog-search">
+    <DialogContent>
+        <MudAutocomplete @ref="_searchAutocomplete"
+                         T="ApiLinkServiceEntry"
+                         PopoverClass="docs-mobile-dialog-search-popover"
+                         Placeholder="Search docs"
+                         SearchFunc="Search"
+                         ValueChanged="OnSearchResult"
+                         Variant="Variant.Outlined"
+                         Adornment="Adornment.Start"
+                         AdornmentIcon="@Icons.Material.Filled.Search">
+            <ItemTemplate Context="result">
+                <MudText>@result.Title</MudText> <MudText Typo="Typo.body2">@result.SubTitle</MudText>
+            </ItemTemplate>
+        </MudAutocomplete>
+        <div class="d-flex justify-center align-center mud-height-full pb-16">
+            <MudText Typo="Typo.body2" Class="mud-text-secondary">Nothing found, do a search</MudText>
+        </div>
+    </DialogContent>
+</MudDialog>

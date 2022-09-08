@@ -1,0 +1,107 @@
+@using System.Linq
+@using System.Text.RegularExpressions
+@using TryCostEngine.MAUI.Extensions
+
+@*<MudText Typo="Typo.subtitle1" Class="mt-1 mb-2 ml-2 d-flex d-md-none"><b>Docs</b></MudText>*@
+<MudNavLink Href="docs/overview"
+            Class="docs-single-link"
+            IconColor="Color.Primary"
+            Icon="@Icons.Material.Filled.Info">概述</MudNavLink>
+@*<MudNavLink Href="unit/tryrun" Class="docs-single-link">模拟</MudNavLink>*@
+
+@*<MudNavGroup Title="基础类库" Expanded="true" ExpandIcon="@Icons.Material.Filled.ExpandMore">
+    @foreach (var item in MenuService.Components.Where(s => !s.Hide))
+    {
+        if (item.IsNavGroup)
+        {
+            <MudNavGroup Title="@item.Name" Expanded="@(IsSubGroupExpanded(item))" ExpandIcon="@Icons.Material.Filled.ExpandMore">
+                @foreach (var subItem in item.GroupComponents)
+                {
+                    string href = $"tp/{subItem.Link}";
+                    <MudNavLink Href="@href">@subItem.Name</MudNavLink>
+                }
+            </MudNavGroup>
+        }
+        else
+        {
+            string href = $"tp/{item.Link}";
+            <MudNavLink Href="@href">@item.Name</MudNavLink>
+        }
+    }
+</MudNavGroup>*@
+
+@*TP*@
+<MudNavGroup Title="协议终端"
+             Expanded="true"
+             IconColor="Color.Primary"
+             ExpandIcon="@Icons.Material.Filled.ExpandMore"
+             Icon="@Icons.Material.Filled.Calculate">
+    @foreach (var item in MenuService.TPModels)
+    {
+        if (item.IsNavGroup)
+        {
+            @* Expanded="@(IsSubGroupExpanded(item))" *@
+            <MudNavGroup Title="@item.Name"
+                 Expanded="true"
+               
+                 ExpandIcon="@Icons.Material.Filled.ExpandMore">
+                @foreach (var subItem in item.GroupComponents)
+                {
+                    string href = $"tp/{subItem.ComponentName.ToLower()}/{subItem.Link:string}";
+                    <MudNavLink Href="@href"
+                    Icon="@Icons.Filled.ArrowRight"
+                    IconColor="Color.Secondary">@subItem.Name</MudNavLink>
+                }
+            </MudNavGroup>
+        }
+        else
+        {
+            string href = $"tp/{item.ComponentName.ToLower()}/{item.Link:string}";
+            <MudNavLink Href="@href" Icon="@Icons.Filled.ArrowRight"
+                IconColor="Color.Secondary">@item.Name</MudNavLink>
+        }
+    }
+</MudNavGroup>
+
+@*SP*@
+<MudNavGroup Title="销售政策"
+             Expanded="true"
+             Icon="@Icons.Material.Filled.Calculate"
+             IconColor="Color.Primary"
+             ExpandIcon="@Icons.Material.Filled.ExpandMore">
+    @foreach (var item in MenuService.SPModels)
+    {
+        if (item.IsNavGroup)
+        {
+            <MudNavGroup Title="@item.Name"
+                 Expanded="true"
+
+                 ExpandIcon="@Icons.Material.Filled.ExpandMore">
+                @foreach (var subItem in item.GroupComponents)
+                {
+                    string href = $"sp/{subItem.ComponentName.ToLower()}/{subItem.Link:string}";
+                    <MudNavLink Href="@href"
+                    Icon="@Icons.Filled.ArrowRight"
+                    IconColor="Color.Secondary">@subItem.Name</MudNavLink>
+                }
+            </MudNavGroup>
+        }
+        else
+        {
+            string href = $"sp/{item.ComponentName.ToLower()}/{item.Link:string}";
+            <MudNavLink Href="@href" Icon="@Icons.Filled.ArrowRight"
+                IconColor="Color.Secondary">@item.Name</MudNavLink>
+        }
+    }
+</MudNavGroup>
+
+
+@*<MudNavGroup Title="API" Expanded="@(_section == "api")" ExpandIcon="@Icons.Material.Filled.ExpandMore">
+    @foreach (var item in MenuService.Api.OrderBy(x => x.Name))
+    {
+        <MudNavLink Href="@ApiLink.GetApiLinkFor(item.Type)">@item.Name</MudNavLink>
+    }
+</MudNavGroup>
+*@
+
+

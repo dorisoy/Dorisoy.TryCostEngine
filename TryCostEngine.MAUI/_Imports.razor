@@ -1,0 +1,36 @@
+﻿@using System.Net.Http
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+
+
+@*MudBlazor*@
+@using MudBlazor
+@using MudBlazor.Extensions
+
+@*CostEngine*@
+@using CostEngine.Data
+@using CostEngine.Data.Extensions
+@using CostEngine.Data.Constants
+@using CostEngine.Util
+
+
+@*TryCostEngine*@
+@using TryCostEngine.MAUI.Extensions
+@using TryCostEngine.MAUI.Components
+@using TryCostEngine.MAUI.Shared
+@using TryCostEngine.MAUI.Pages
+@using TryCostEngine.MAUI.Models
+@using TryCostEngine.MAUI.Services
+@using TryCostEngine.MAUI.Pages.Calc
+@using TryCostEngine.MAUI.Pages.Calc.Components
+@using TryCostEngine.MAUI
+
+@*inject*@
+@inject NavigationManager NavigationManager
+@inject ITPCalcService _tpCalcService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar

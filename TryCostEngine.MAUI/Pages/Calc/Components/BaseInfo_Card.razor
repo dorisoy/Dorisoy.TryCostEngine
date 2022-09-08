@@ -1,0 +1,244 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+
+
+
+<MudGrid>
+    <MudItem xs="12" sm="12" md="6" Class="pa-2 gap-2 mt-4">
+        <MudDateRangePicker Margin="Margin.Dense"
+                            @ref="_picker"
+                            Label="协议起止日期范围"
+                            @bind-DateRange="_dateRange"
+                            Variant="Variant.Outlined">
+            <PickerActions>
+                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">清除</MudButton>
+                <MudButton OnClick="@(() => _picker.Close(false))">取消</MudButton>
+                <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">确定</MudButton>
+            </PickerActions>
+        </MudDateRangePicker>
+    </MudItem>
+    <MudItem xs="12" sm="12" md="6" Class="pa-2 gap-2 mt-4">
+        <MudNumericField T="int" @bind-Value="@Model.ProtocolMonths" Label="合同月数" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentIcon="@Icons.Material.Filled.Warning" AdornmentColor="Color.Warning" />
+    </MudItem>
+</MudGrid>
+
+<MudDivider DividerType="DividerType.Middle" Class="mt-6 mb-6 ml-0 mr-0" />
+
+
+
+
+<MudGrid>
+    <MudItem xs="12" sm="6" md="3" Class="pa-2 gap-2">
+
+        <MudCard>
+
+            <MudCardContent>
+                <MudAutocomplete T="string" Label="营销中心" Placeholder="浙江营销中心" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="大区" Placeholder="杭州大区" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="业务部" Placeholder="杭州餐饮业务部" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="工作站" Placeholder="杭州城区餐饮ABC" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentColor="Color.Primary" Class="mb-4" />
+            </MudCardContent>
+        </MudCard>
+
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Class="pa-2 gap-2">
+
+
+        <MudCard>
+
+            <MudCardContent>
+                <MudAutocomplete T="string" Label="终端名称" @bind-Value="TmnNm" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="终端编码" @bind-Value="@Model.TmnCD" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="终端地址" @bind-Value="@Model.TpAddress" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" Class="mb-4" />
+                @*  <MudTextField Variant="Variant.Outlined" @bind-Value="@Model.StartDate" T="string" Format="yyyy-MM-dd" Label="协议开始日期" InputType="InputType.Date" Margin="Margin.Dense" AdornmentColor="Color.Primary" Class="mb-4"/>
+                <MudTextField Variant="Variant.Outlined" @bind-Value="@Model.EndDate" T="string" Format="yyyy-MM-dd" Label="协议截止日期" InputType="InputType.Date" Margin="Margin.Dense" AdornmentColor="Color.Primary" Class="mb-4"/>*@
+
+                <MudAutocomplete T="string" Label="终端一级类型" @bind-Value="@Model.Lvl1Type" Margin="Margin.Dense" Variant="Variant.Outlined"  AdornmentColor="Color.Primary" Class="mb-4" />
+
+            </MudCardContent>
+        </MudCard>
+
+
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Class="pa-2 gap-2">
+
+
+        <MudCard>
+
+            <MudCardContent>
+                <MudSelect Label="享受档次标准"
+                           Class="mb-4"
+                           @bind-Value="Model.ProductEnjoyStandardType"
+                           For="(() => Model.ProductEnjoyStandardType)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.ProductEnjoyStandardType item in Enum.GetValues(typeof(GEnum.ProductEnjoyStandardType)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+
+                <MudAutocomplete T="string" Label="一批商" @bind-Value="@Model.Distributor1CD" SearchFunc="@Search1" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="二批商" @bind-Value="@Model.Distributor2CD" SearchFunc="@Search1" Margin="Margin.Dense" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" Class="mb-4" />
+                <MudAutocomplete T="string" Label="二批商承担比例" @bind-Value="@Model.Distributor2Rate"  Margin="Margin.Dense" Variant="Variant.Outlined"  AdornmentColor="Color.Primary" Class="mb-4" />
+            </MudCardContent>
+        </MudCard>
+
+
+
+
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Class="pa-2 gap-2">
+
+
+        <MudCard>
+
+            <MudCardContent>
+
+                 <MudSelect Label="签约标记"
+                           Class="mb-4"
+                           @bind-Value="Model.SigningMark"
+                           For="(() => Model.SigningMark)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.SigningMark item in Enum.GetValues(typeof(GEnum.SigningMark)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+
+                <MudSelect Label="合作方式一"
+                           Class="mb-4"
+                           @bind-Value="Model.CooperationModeOne"
+                           For="(() => Model.CooperationModeOne)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.CooperationModeOne item in Enum.GetValues(typeof(GEnum.CooperationModeOne)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect Label="合作方式二"
+                           Class="mb-4"
+                           @bind-Value="Model.CooperationModeTow"
+                           For="(() => Model.CooperationModeTow)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.CooperationModeTow item in Enum.GetValues(typeof(GEnum.CooperationModeTow)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect Label="合作方式三"
+                           Class="mb-4"
+                           @bind-Value="Model.CooperationModeThree"
+                           For="(() => Model.CooperationModeThree)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    @foreach (GEnum.CooperationModeThree item in Enum.GetValues(typeof(GEnum.CooperationModeThree)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+
+            </MudCardContent>
+        </MudCard>
+
+
+
+
+    </MudItem>
+</MudGrid>
+
+
+<MudGrid>
+    <MudItem xs="12" sm="12" md="12" Class="pa-2 gap-2 mt-2">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+            @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    MudDateRangePicker _picker;
+    DateRange _dateRange = new DateRange(DateTime.Now.Date, DateTime.Now.AddDays(5).Date);
+    string[] errors = { };
+
+    public bool Label_CheckBox2 { get; set; } = true;
+    private int cpxl { get; set; }
+    private int dxbz { get; set; }
+
+    [Parameter]
+    public ProtocolBaseBasicinfo Model { get; set; }
+
+    Pizza pizza = new Pizza { Name = "" };
+    public class Pizza
+    {
+        public string Name { get; set; }
+        public override bool Equals(object o)
+        {
+            var other = o as Pizza;
+            return other?.Name == Name;
+        }
+        public override int GetHashCode() => Name.GetHashCode();
+    }
+    Func<Pizza, string> converter = p => p?.Name;
+
+    //
+    private string TmnNm;
+    private string StartDate;
+    private string EndDate;
+
+    private string[] states =
+    {
+        "浙江唯尊食品有限公司",
+        "嘉里中心五楼烤匠店（四季风情）",
+        "四季风情元华店",
+        "杭州西子湖四季酒店"
+    };
+    private async Task<IEnumerable<string>> Search1(string value)
+    {
+        await Task.Delay(5);
+        if (string.IsNullOrEmpty(value))
+            return states;
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            TmnNm = Model.TmnNm;
+            _dateRange = new DateRange(DateTime.Parse(Model.StartDate), DateTime.Parse(Model.EndDate));
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.Print(ex.Message);
+        }
+
+        await base.OnInitializedAsync();
+    }
+}

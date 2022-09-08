@@ -1,0 +1,338 @@
+{
+  "TemplateCD": "00000003",
+  "PlanID": "1482804",
+  "ID": "1411672",
+  "CreateMonth": "7",
+  "CreateYear": "2022",
+  "AllowDelayDays": "365",
+  "IsAllowPreMonth": "1",
+  "CreatedOnStr": "2022/7/25 14:13:31",
+  "PolicyCD": "PZC22000206429",
+  "PolicyTitle": "clie123",
+  "Level1CD": "FSP00001",
+  "Level2CD": "SSP00001",
+  "TypeCD": "1",
+  "StartOn": "2022-07-25",
+  "EndOn": "2022-09-25",
+  "LineCD": "ZSNM01",
+  "PolicyObjectCode": "00000001",
+  "ActivityPurposeCode": "0",
+  "ChargeControlMode": "0",
+  "IsXYZDUsed": "1",
+  "BillingMethodCode": "001",
+  "RegionCD": "",
+  "IsSingleBoxClosingCost": "0",
+  "IsNeedPredictSaleCount": "1",
+  "IsNeedDT": 1,
+  "RelatePolicyID": "",
+  "RelatePolicyCD": "",
+  "ProductSelectionDimension": "0",
+  "IsTotalControl": "true",
+  "PolicyDesc": "fsdsvds",
+  "SDTList": [
+    {
+      "RegionCD": "",
+      "ID": 1440182,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": "0110000077",
+      "SysNum": "",
+      "TMNNum": 8,
+      "MiniOrgCD": "50044889"
+    }
+  ],
+  "SPList": [
+    {
+      "RegionCD": "",
+      "ID": 1502616,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": null,
+      "ProductCD": "310100502430000",
+      "CharacterCD": "00",
+      "ErpItemNumber": "31010050243000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶"
+    },
+    {
+      "RegionCD": "",
+      "ID": 1502617,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": null,
+      "ProductCD": "310100502440000",
+      "CharacterCD": "00",
+      "ErpItemNumber": "31010050244000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱"
+    }
+  ],
+  "SOrgList": [
+    {
+      "RegionCD": "",
+      "ID": 1528199,
+      "ProtocolBasicInfoID": "0",
+      "MarketOrg": "50000665",
+      "BigAreaOrg": "50000667",
+      "OfficeOrg": "50000674",
+      "StationOrg": "50044889"
+    }
+  ],
+  "STmnList": [],
+  "SPreSalesList": [
+    {
+      "RegionCD": "",
+      "ID": 1468045,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": "0110000077",
+      "TMNCD": null,
+      "ProductCD": "310100502430000",
+      "SysNum": "",
+      "EstimateSalesCount": 15,
+      "CharacterCD": "00",
+      "MSSList": [
+        {
+          "Month": "202207",
+          "SalesCount": 5
+        },
+        {
+          "Month": "202208",
+          "SalesCount": 5
+        },
+        {
+          "Month": "202209",
+          "SalesCount": 5
+        }
+      ],
+      "ErpItemNumber": "31010050243000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶"
+    },
+    {
+      "RegionCD": "",
+      "ID": 1468046,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": "0110000077",
+      "TMNCD": null,
+      "ProductCD": "310100502440000",
+      "SysNum": "",
+      "EstimateSalesCount": 15,
+      "CharacterCD": "00",
+      "MSSList": [
+        {
+          "Month": "202207",
+          "SalesCount": 5
+        },
+        {
+          "Month": "202208",
+          "SalesCount": 5
+        },
+        {
+          "Month": "202209",
+          "SalesCount": 5
+        }
+      ],
+      "ErpItemNumber": "31010050244000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱"
+    }
+  ],
+  "SPreCostList": [
+    {
+      "RegionCD": "",
+      "ID": 1618659,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": "0110000077",
+      "TMNCD": null,
+      "ProductCD": "310100502430000",
+      "SysNum": "",
+      "TotalCost": 252,
+      "CompanyRate": 0.3401,
+      "CompanyTotalCost": 50.04,
+      "CharacterCD": "00",
+      "MSCList": [
+        {
+          "Month": "202207",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        },
+        {
+          "Month": "202208",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        },
+        {
+          "Month": "202209",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        }
+      ],
+      "ErpItemNumber": "31010050243000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶",
+      "ZJTotalCost": 180
+    },
+    {
+      "RegionCD": "",
+      "ID": 1618660,
+      "ProtocolBasicInfoID": "0",
+      "DTCD": "0110000077",
+      "TMNCD": null,
+      "ProductCD": "310100502440000",
+      "SysNum": "",
+      "TotalCost": 252,
+      "CompanyRate": 0.3401,
+      "CompanyTotalCost": 50.04,
+      "CharacterCD": "00",
+      "MSCList": [
+        {
+          "Month": "202207",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        },
+        {
+          "Month": "202208",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        },
+        {
+          "Month": "202209",
+          "Cost": 16.68,
+          "TotalCost": 16.68,
+          "ZJCost": 60
+        }
+      ],
+      "ErpItemNumber": "31010050244000000",
+      "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱",
+      "ZJTotalCost": 180
+    }
+  ],
+  "SingleBoxStrength": [],
+  "UpAttachments": [],
+  "DelAttachments": [],
+  "IMDisplay": {
+    "Standard": "大大是",
+    "IMDisplayProductList": [
+      {
+        "RegionCD": "50000614",
+        "ID": 0,
+        "IMDisplayID": 0,
+        "PresentType": 2,
+        "ProductCD": "",
+        "CharacterCD": "",
+        "PresentName": "wu",
+        "PresentNum": 6,
+        "PresentPrice": 2,
+        "CompanyUndertakeRate": 1,
+        "IMSList": [
+          {
+            "RegionCD": "50000614",
+            "ID": 214760,
+            "IMDisplayProductID": 212051,
+            "Month": "202207",
+            "GiftNum": 2
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214761,
+            "IMDisplayProductID": 212051,
+            "Month": "202208",
+            "GiftNum": 2
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214762,
+            "IMDisplayProductID": 212051,
+            "Month": "202209",
+            "GiftNum": 2
+          }
+        ],
+        "ErpItemNumber": null,
+        "ErpItemDesc": null,
+        "DTCD": null,
+        "IMS0": 0,
+        "IMS1": 1,
+        "IMS2": 2
+      },
+      {
+        "RegionCD": "50000614",
+        "ID": 0,
+        "IMDisplayID": 0,
+        "PresentType": 1,
+        "ProductCD": "310100502430000",
+        "CharacterCD": "00",
+        "PresentName": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶",
+        "PresentNum": 3,
+        "PresentPrice": 0,
+        "CompanyUndertakeRate": 0.01,
+        "IMSList": [
+          {
+            "RegionCD": "50000614",
+            "ID": 214763,
+            "IMDisplayProductID": 212052,
+            "Month": "202207",
+            "GiftNum": 1
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214764,
+            "IMDisplayProductID": 212052,
+            "Month": "202208",
+            "GiftNum": 1
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214765,
+            "IMDisplayProductID": 212052,
+            "Month": "202209",
+            "GiftNum": 1
+          }
+        ],
+        "ErpItemNumber": "31010050243000000",
+        "ErpItemDesc": "雪花勇闯天涯10度222ml浙江专用白瓶1*24纸箱含瓶",
+        "DTCD": null,
+        "IMS0": 0,
+        "IMS1": 1,
+        "IMS2": 2
+      },
+      {
+        "RegionCD": "50000614",
+        "ID": 0,
+        "IMDisplayID": 0,
+        "PresentType": 3,
+        "ProductCD": "",
+        "CharacterCD": "",
+        "PresentName": "现金",
+        "PresentNum": 3,
+        "PresentPrice": 2,
+        "CompanyUndertakeRate": 0.01,
+        "IMSList": [
+          {
+            "RegionCD": "50000614",
+            "ID": 214766,
+            "IMDisplayProductID": 212053,
+            "Month": "202207",
+            "GiftNum": 1
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214767,
+            "IMDisplayProductID": 212053,
+            "Month": "202208",
+            "GiftNum": 1
+          },
+          {
+            "RegionCD": "50000614",
+            "ID": 214768,
+            "IMDisplayProductID": 212053,
+            "Month": "202209",
+            "GiftNum": 1
+          }
+        ],
+        "ErpItemNumber": null,
+        "ErpItemDesc": null,
+        "DTCD": null,
+        "IMS0": 0,
+        "IMS1": 1,
+        "IMS2": 2
+      }
+    ]
+  }
+}

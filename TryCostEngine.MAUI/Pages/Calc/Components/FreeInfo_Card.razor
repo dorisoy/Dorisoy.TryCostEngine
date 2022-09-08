@@ -1,0 +1,210 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+@using Newtonsoft.Json
+
+
+@*兑付信息*@
+
+<style>
+    .mud-all-table-header-row {
+        background-color: var(--mud-palette-table-hover);
+    }
+</style>
+
+<MudTable Items="@Items"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+
+    <ColGroup>
+        <col style="width: 100px" />
+        <col style="width: 150px" />
+        <col style="width: 150px" />
+        <col />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入编号</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入方式</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">打包</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">详情</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+
+        @*投入编号*@
+        <MudTd Class="pa-2 gap-2" DataLabel="No">
+            <MudForm Model="@context">
+                <MudTextField T="string"
+                              Value="context.No"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense"
+                              ReadOnly="true" />
+            </MudForm>
+        </MudTd>
+
+        @*投入方式*@
+        <MudTd Class="pa-2 gap-2" DataLabel="GivingWay">
+            <MudForm Model="@context">
+                <MudSelect @bind-Value="context.GivingWayType"
+                           For="(() => context.GivingWayType)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense" 
+                           SelectedValuesChanged="@((IEnumerable<GEnum.InvestPresentMode> t)=>OnGivingWayTypeChanged(t,context))">
+                    @foreach (GEnum.InvestPresentMode item in Enum.GetValues(typeof(GEnum.InvestPresentMode)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudForm>
+        </MudTd>
+
+        @*打包*@
+        <MudTd Class="pa-2 gap-2" DataLabel="BaseNum">
+            <MudForm Model="@context">
+                <MudSelect @bind-Value="context.PackingType"
+                           For="(() => context.PackingType)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           SelectedValuesChanged="@((IEnumerable<GEnum.InvestPackageMode> t)=>OnSelectedValuesChanged(t,context))">
+                    @foreach (GEnum.InvestPackageMode item in Enum.GetValues(typeof(GEnum.InvestPackageMode)))
+                    {
+                        <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudForm>
+        </MudTd>
+
+        @*详情*@
+        <MudTd Class="pa-2 gap-2 justify-center align-center">
+            <CascadingValue Value="@ParameterModel" Name="ParameterModel" IsFixed>
+                <ProductDetails_Card Model="@context" Items="@context.Details" />
+            </CascadingValue>
+        </MudTd>
+
+    </RowTemplate>
+</MudTable>
+
+@*@(JsonConvert.SerializeObject(Details));
+*@
+
+@code
+{
+    [Parameter]
+    public List<ProtocolBaseFydlzhDatum> Items { get; set; } = new();
+
+    private List<ProtocolBaseDetail> Details = new ();
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var ps = ParameterModel.Model.goodInfo;
+
+        if (Items.Any())
+        {
+            Items.ForEach(s =>
+            {
+                s?.Details.ForEach(d =>
+                {
+                    if (!d.DetailGoods.Any())
+                    {
+                        var goods = d.DetailGoodCD.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        goods.ForEach(sp =>
+                        {
+                            var p = ps.Where(g => g.GoodCD == sp).Select(n => n).First();
+                            if (p != null && !d.DetailGoods.ContainsKey(p.GoodCD))
+                                d.DetailGoods.Add(p.GoodCD, p.GoodNm);
+                        });
+                    }
+                });
+            });
+        }
+    }
+
+    //打包类型选择
+    private void OnSelectedValuesChanged(IEnumerable<GEnum.InvestPackageMode> values, ProtocolBaseFydlzhDatum context )
+    {
+        var details = new List<ProtocolBaseDetail>();
+        var ps = ParameterModel.Model.goodInfo;
+
+        try
+        {
+            if (context.Details.Any())
+            {
+                var defultDt = context.Details.First();
+
+                switch (context.PackingType)
+                {
+                    case GEnum.InvestPackageMode.按产品:
+                        {
+                            foreach (var dg in defultDt.DetailGoods)
+                            {
+                                var d = defultDt.DeepCloneObject();
+                                d.DetailGoods = new Dictionary<string, string>() { { dg.Key, dg.Value } };
+                                details.Add(d);
+                            }
+                            break;
+                        }
+                    case GEnum.InvestPackageMode.按套装:
+                        {
+                            var d = defultDt.DeepCloneObject();
+                            foreach (var set in context.Sets)
+                            {
+                                var p = ps.Where(g => g.GoodCD == set.SetGoodCD).Select(n => n).First();
+                                if (p != null && !d.DetailGoods.ContainsKey(p.GoodCD))
+                                    d.DetailGoods.Add(p.GoodCD, p.GoodNm);
+                            }
+                            details.Add(d);
+                            break;
+                        }
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        //Details = details;
+        context.Details = details;
+    }
+
+
+    private void OnGivingWayTypeChanged(IEnumerable<GEnum.InvestPresentMode> values, ProtocolBaseFydlzhDatum context)
+    {
+        if (context.Details.Any())
+        {
+            context.Details.ForEach(s =>
+            {
+                foreach (var item in s.BearWay)
+                {
+                    switch (context.GivingWayType)
+                    {
+                        case GEnum.InvestPresentMode.固定给钱:
+                        case GEnum.InvestPresentMode.随量费用:
+                            item.FillWayType = GEnum.FillWayMode.ByAmount;
+                            break;
+                        case GEnum.InvestPresentMode.固定给酒:
+                        case GEnum.InvestPresentMode.促销用酒:
+                            item.FillWayType = GEnum.FillWayMode.ByQuantity;
+                            break;
+                        case GEnum.InvestPresentMode.随量返点:
+                            item.FillWayType = GEnum.FillWayMode.ByPercent;
+                            break;
+                    }
+                }
+            });
+        }
+    }
+}

@@ -1,0 +1,47 @@
+﻿@typeparam T where T: Enum
+
+@using CostEngine.Data
+@using TryCostEngine.MAUI.Models
+@using CostEngine.Data.Constants
+@using CostEngine.Data.Extensions
+
+<div class="mud-width-full d-flex justify-end">
+    <MudButtonGroup OverrideStyles="false">
+        @foreach (int value in Enum.GetValues(EType))
+        {
+            <MudButton Color="Color.Primary" Size="Size.Small" 
+            DisableElevation="true" 
+            Variant="@(value == Convert.ToInt32(Value) ? Variant.Filled : Variant.Outlined)" OnClick="() => Value = (T)Enum.ToObject(EType, value)">
+
+      @*      @Enum.GetName(EType, value)*@
+
+                @{
+                    var t = (Grouping)Enum.Parse(typeof(Grouping), Enum.GetName(EType, value));
+                }
+
+                @t.GetEnumDescription()
+
+            </MudButton>
+        }
+    </MudButtonGroup>
+</div>
+
+@code {
+    private T _value;
+
+    [Parameter]
+    public T Value
+    {
+        get => _value;
+        set
+        {
+            if (_value.Equals(value)) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter] public EventCallback<T> ValueChanged { get; set; }
+
+    private Type EType => typeof(T);
+}

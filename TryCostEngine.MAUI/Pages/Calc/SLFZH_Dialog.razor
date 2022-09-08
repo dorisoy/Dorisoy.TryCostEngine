@@ -1,0 +1,583 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Calculate" Color="Color.Primary" Class="mr-3 mb-n1" />
+            @this.MudDialog.Title
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudForm Model="@model" @ref="@form" ValidationDelay="0">
+
+            <MudTabs Elevation="1"
+                     Rounded="true"
+                     MaxHeight="700"
+                    Style="height:700px;overflow-y: scroll"
+                     ApplyEffectsToContainer="true"
+                     PanelClass="pa-4"
+                     Border="true">
+
+          <MudTabPanel Icon="@Icons.Outlined.PlaylistAddCheckCircle" Text="基本信息">
+                    <BaseInfo_Card></BaseInfo_Card>
+                </MudTabPanel>
+
+                <MudTabPanel Icon="@Icons.Outlined.PlaylistAddCircle" Text="投入规则">
+
+                  <Product_Card Title="投入商品" Items="@model.GoodInfos" />
+
+                    <TPHeader Title="投入信息" />
+
+                    <MudTable Items="@model.ProtocolBaseGdgjDatas"
+                              Hover="true"
+                              Breakpoint="Breakpoint.None"
+                              Dense="@true"
+                              Elevation="1">
+
+                        <ColGroup>
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col style="width: 250px" />
+                            <col />
+                            <col style="width: 120px" />
+                        </ColGroup>
+
+                        <HeaderContent>
+                            <MudTh>投入编号</MudTh>
+                            <MudTh>业务类型</MudTh>
+                            <MudTh>赠送产品</MudTh>
+                            <MudTh>总件数</MudTh>
+                            <MudTh>受益产品</MudTh>
+                            <MudTh>兑付条件</MudTh>
+                            <MudTh Style="text-align:center">操作</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="No">
+                                <MudForm Model="@context">
+                                    <MudTextField @bind-Value="context.No"
+                                                  Variant="Variant.Outlined"
+                                                  Margin="Margin.Dense"
+                                                  For="(() => context.No)" />
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="BusinessTypeName">
+                                <MudForm Model="@context">
+                                    <MudSelect T="string"
+                                               @bind-Value="context.BusinessTypeName"
+                                               For="(() => context.BusinessTypeName)"
+                                               AnchorOrigin="Origin.BottomCenter"
+                                               Variant="Variant.Outlined"
+                                               Margin="Margin.Dense"
+                                               >
+                                        <MudSelectItem T="string" Value="@("合作费")" />
+                                        <MudSelectItem T="string" Value="@("意见领袖费用")" />
+                                        <MudSelectItem T="string" Value="@("自定义")" />
+                                    </MudSelect>
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="GoodNm">
+                                <MudForm Model="@context">
+                                    <MudAutocomplete T="string"
+                                                     Variant="Variant.Outlined"
+                                                     @bind-Value="context.GoodNm"
+                                                     For="(() => context.GoodNm)"
+                                                     SearchFunc="@SearchrPoducts"
+                                                     ResetValueOnEmptyText="@resetValueOnEmptyText"
+                                                     Margin="Margin.Dense"
+                                                     CoerceText="@coerceText"
+                                                     CoerceValue="@coerceValue"
+                                                     AdornmentIcon="@Icons.Material.Filled.Search"
+                                                     AdornmentColor="Color.Primary" />
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="TotalAmount">
+                                <MudForm Model="@context">
+                                    <MudTextField @bind-Value="context.TotalAmount"
+                                                  Variant="Variant.Outlined"
+                                                  Margin="Margin.Dense"
+                                                  For="(() => context.TotalAmount)" />
+                                </MudForm>
+                            </MudTd>
+
+                            @*受益产品*@
+                            <MudTd Class="pa-2 gap-2" DataLabel="SRCD">
+                                <MudForm Model="@context">
+                                    <MudSelect T="string"
+                                               MultiSelection="true"
+                                               Margin="Margin.Dense"
+                                               Variant="Variant.Outlined"
+                                               SelectAll="true"
+                                               SelectAllText="全部"
+                                               HelperText="@value"
+                                               @bind-Value="value"
+                                               @bind-SelectedValues="options"
+                                               AdornmentIcon="@Icons.Material.Filled.Search">
+                                        @foreach (var feline in felines)
+                                        {
+                                            <MudSelectItem T="string" Value="@feline">@feline</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="Notes">
+                                <MudForm Model="@context">
+                                    <MudTextField @bind-Value="context.Notes"
+                                                  Placeholder="请输入..."
+                                                  Variant="Variant.Outlined"
+                                                  Margin="Margin.Dense"
+                                                  For="(() => context.Notes)" />
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2 justify-center align-center">
+                                <MudForm Model="@context">
+                                    <MudButtonGroup Variant="Variant.Filled">
+                                        <MudIconButton Icon="@Icons.Filled.Add"
+                                                       Color="Color.Primary"
+                                                       OnClick="AddTRorYGTR" />
+
+                                        <MudIconButton Icon="@Icons.Filled.Delete"
+                                                       Color="Color.Primary"
+                                                       OnClick="@(()=>RemoveTRorYGTR(context.No))" />
+                                    </MudButtonGroup>
+                                </MudForm>
+                            </MudTd>
+
+                        </RowTemplate>
+                    </MudTable>
+
+                    <TPHeader Title="预估投入/兑付信息" />
+
+                    <MudTable Items="@model.ProtocolBaseGdgjDatas"
+                              Hover="true"
+                              Breakpoint="Breakpoint.None"
+                              Dense="@true"
+                              Elevation="1">
+
+                        <ColGroup>
+                            <col />
+                            <col />
+                            <col />
+                            <col style="width: 120px" />
+                            <col style="width: 120px" />
+                            <col />
+                            <col style="width: 120px" />
+                        </ColGroup>
+
+
+                        <HeaderContent>
+                            <MudTh>投入编号</MudTh>
+                            <MudTh>投入方式</MudTh>
+                            <MudTh>标准基数</MudTh>
+                            <MudTh>兑付标准</MudTh>
+                            <MudTh>承担方式</MudTh>
+                            <MudTh>支付频率</MudTh>
+                            <MudTh Style="text-align:center">操作</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="No">
+                                <MudForm Model="@context">
+                                    <MudTextField @bind-Value="context.No"
+                                                  Variant="Variant.Outlined"
+                                                  Margin="Margin.Dense"
+                                                  For="(() => context.No)" />
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="GivingWay">
+                                <MudForm Model="@context">
+                                    <MudSelect @bind-Value="context.GivingWayType"
+                                               For="(() => context.GivingWayType)"
+                                               AnchorOrigin="Origin.BottomCenter"
+                                               Variant="Variant.Outlined"
+                                               Margin="Margin.Dense"
+                                               >
+                                        @foreach (GEnum.InvestPresentMode item in Enum.GetValues(typeof(GEnum.InvestPresentMode)))
+                                        {
+                                            <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="BaseNum">
+                                <MudForm Model="@context">
+                                    <MudTextField @bind-Value="context.BaseNum"
+                                                  Variant="Variant.Outlined"
+                                                  Margin="Margin.Dense"
+                                                  For="(() => context.BaseNum)" />
+                                </MudForm>
+                            </MudTd>
+
+                            @*兑付标准*@
+                            <MudTd Class="pa-2 gap-2" DataLabel="EntryPrice">
+                                <MudForm Model="@context">
+                                    <MudIconButton Icon="@Icons.Filled.TableView"
+                                                   Color="Color.Primary"
+                                                   OnClick="OpenDialog2" />
+                                </MudForm>
+                            </MudTd>
+
+                            @*承担方式*@
+                            <MudTd Class="pa-2 gap-2" DataLabel="SRCD">
+                                <MudForm Model="@context">
+                                    <MudIconButton Icon="@Icons.Filled.TableView"
+                                                   Color="Color.Primary"
+                                                   OnClick="OpenDialog3" />
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2" DataLabel="PayRate">
+                                <MudForm Model="@context">
+                                    <MudSelect @bind-Value="context.PayRate.PayRateC2DType"
+                                               For="(() => context.PayRate.PayRateC2DType)"
+                                               AnchorOrigin="Origin.BottomCenter"
+                                               Variant="Variant.Outlined"
+                                               Margin="Margin.Dense"
+                                               >
+                                        @foreach (GEnum.PayRateD2CType item in Enum.GetValues(typeof(GEnum.PayRateD2CType)))
+                                        {
+                                            <MudSelectItem Value="@item">@EnumExt.GetDisplayText(item)</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </MudForm>
+                            </MudTd>
+
+                            <MudTd Class="pa-2 gap-2 justify-center align-center">
+                                <MudForm Model="@context">
+                                    <MudButtonGroup Variant="Variant.Filled">
+                                        <MudIconButton Icon="@Icons.Filled.Add"
+                                                       Color="Color.Primary"
+                                                       OnClick="AddTRorYGTR" />
+
+                                        <MudIconButton Icon="@Icons.Filled.Delete"
+                                                       Color="Color.Primary"
+                                                       OnClick="@(()=>RemoveTRorYGTR(context.No))" />
+                                    </MudButtonGroup>
+                                </MudForm>
+                            </MudTd>
+
+                        </RowTemplate>
+                    </MudTable>
+
+                </MudTabPanel>
+            </MudTabs>
+        </MudForm>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" OnClick="Cancel" Class="mr-4 mb-4">重算</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="Submit" Class="mr-4 mb-4">利润测算</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Class="mr-4 mb-4">费用计算</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    public SLFZH_Dialog()
+    {
+    }
+    
+    //兑付标准窗体
+    private void OpenDialog2()
+    {
+        var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                DisableBackdropClick = true
+            };
+        var parameters = new DialogParameters();
+        parameters.Add("TypeDes", "件数");
+        var dialog = DialogService.Show<DFBZ_Dialog>("兑付标准", parameters, options);
+    }
+
+    //承担方式窗体
+    private void OpenDialog3()
+    {
+        var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                DisableBackdropClick = true,
+                MaxWidth = MaxWidth.Medium,
+            };
+        var dialog = DialogService.Show<CDFS_Dialog>("承担方式", options);
+    }
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string CalcDes { get; set; }
+
+
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+    MudForm form;
+
+    TPModel model = new TPModel();
+
+    private string[] products =
+    {
+        "雪花7度330ml白瓶1*24纸箱(310100000020000)",
+        "雪花纯9度29L桶(310100000010000)"
+    };
+    private async Task<IEnumerable<string>> SearchrPoducts(string value)
+    {
+        await Task.Delay(5);
+
+        if (string.IsNullOrEmpty(value))
+            return new string[0];
+        return products.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    //受益产品
+    private string value { get; set; } = "选择产品";
+    private IEnumerable<string> options { get; set; } = new HashSet<string>() 
+    {
+        "雪花纯9度29L桶(310100000010000)"
+    };
+    private string[] felines =
+    {
+       "雪花7度330ml白瓶1*24纸箱(310100000020000)",
+       "雪花纯9度29L桶(310100000010000)"
+    };
+
+    private string GetMultiSelectionText(List<string> selectedValues)
+    {
+        return $"{selectedValues.Count} 个产品已选择";
+    }
+
+    public class TPModel
+    {
+        public List<ProtocolBaseGoodinfo> GoodInfos = new List<ProtocolBaseGoodinfo>()
+        {
+            new ProtocolBaseGoodinfo()
+            {
+                GoodCD= "310100000020000",
+                SaleWriteRuleCDType = SaleWriteRuleCDType.Month,
+                EstimatedTotalSales= 100,
+                EffectiveMonth="",
+                ExpiryMonth= "",
+                FeeControl= "0",
+                OpenFare= "50.00",
+                EstimatePrice= "100.00",
+                EntryPrice= "50.00",
+                DTCD= "0111106007",
+                Class= "中档",
+                ClassLevel= 6,
+                BottleCount=24,
+                Brand= "雪花",
+                GoodNm= "雪花7度330ml白瓶1*24纸箱(310100000020000)"
+            },
+            new ProtocolBaseGoodinfo()
+            {
+                GoodCD= "310100000020000",
+              SaleWriteRuleCDType = SaleWriteRuleCDType.Month,
+                EstimatedTotalSales= 100,
+                EffectiveMonth="",
+                ExpiryMonth= "",
+                FeeControl= "0",
+                OpenFare= "50.00",
+                EstimatePrice= "100.00",
+                EntryPrice= "50.00",
+                DTCD= "0111106007",
+                Class= "中档",
+                ClassLevel= 6,
+                BottleCount=24,
+                Brand= "雪花",
+                GoodNm= "雪花7度330ml白瓶1*24纸箱(310100000020000)"
+            }
+        };
+        public List<ProtocolBaseGdgjDatum> ProtocolBaseGdgjDatas = new List<ProtocolBaseGdgjDatum>()
+        {
+            new ProtocolBaseGdgjDatum()
+            {
+                ID = "DF1",
+                No = "006001",
+                BusinessType = "STP00100",
+                IsVerification = "1",
+                TotalAmount = "6",
+                FeeBearMode = "2",
+                FeeBears  = new List<ProtocolBaseFeebear>()
+                {
+                    new ProtocolBaseFeebear()
+                    {
+                        ID = "FeeBear4",
+                        GoodCD = "310144000040000",
+                        State = 3
+                    }
+                },
+                Notes = "",
+                State = 3,
+                BusinessTypeName = "合作费",
+                GoodCD = "310100000010000",
+                GoodPrice = "48.30",
+                GoodNm = "雪花纯9度29L桶",
+                DTCD = "0111106007",
+                 GivingWayType = GEnum.InvestPresentMode.固定给酒,
+                BaseNum = "1",
+                BearWay =  new ProtocolBaseBearway()
+                {
+                  ID = "FeeBear2",
+                  GivingWayType= GEnum.InvestPresentMode.固定给酒,
+                  FillWay = 3,
+                  FeeCompany = "6",
+                  RateCompany = "100",
+                  FeeDistributor = "0",
+                  RateDistributor = "0",
+                  State = 3
+                },
+                InvestDetail = new List<ProtocolBaseInvestdetail>()
+                {
+                    new ProtocolBaseInvestdetail(){
+                        ID = "InvestDetail1",
+                        InvestMonth = "1",
+                        InvestAmount = 2,
+                        State = 3
+                    },
+                    new ProtocolBaseInvestdetail(){
+                        ID = "InvestDetail6",
+                        InvestMonth = "2",
+                        InvestAmount = 2,
+                        State = 3
+                    },
+                    new ProtocolBaseInvestdetail()
+                    {
+                        ID = "InvestDetail7",
+                        InvestMonth = "3",
+                        InvestAmount = 2,
+                        State = 3
+                    }
+                },
+                PayRate = new ProtocolBaseGdgjPayrate()
+                {
+                    PayRateC2DType =  GEnum.PayRateD2CType.分月平均支付,
+                    State= 3,
+                    PayMonthsC2D = new List<ProtocolBaseGdgjPaymonthsc2d>()
+                    {
+                        new ProtocolBaseGdgjPaymonthsc2d()
+                        {
+                            ID = "PayMonth1",
+                            ProtocalMonth = "",
+                            AmountC2D = "",
+                            State = 3
+                        }
+                    },
+                }
+            }
+        };
+    }
+
+    /// <summary>
+    /// 追加投入/预估投入
+    /// </summary>
+    private void AddTRorYGTR()
+    {
+        var gernum = UtilHelpher.GenerateSerialNumber(GEnum.InvestModeEnum.GDProduct, model.ProtocolBaseGdgjDatas.Count);
+        var temp = new ProtocolBaseGdgjDatum()
+            {
+                ID = "DF1",
+                No = gernum,
+                BusinessType = "STP00100",
+                IsVerification = "1",
+                TotalAmount = "6",
+                FeeBearMode = "2",
+                FeeBears = new List<ProtocolBaseFeebear>()
+                {
+                    new ProtocolBaseFeebear()
+                    {
+                        ID = "FeeBear4",
+                        GoodCD = "310144000040000",
+                        State = 3
+                    }
+                },
+                Notes = "",
+                State = 3,
+                BusinessTypeName = "合作费",
+                GoodCD = "310100000010000",
+                GoodPrice = "48.30",
+                GoodNm = "雪花纯9度29L桶",
+                DTCD = "0111106007",
+                GivingWayType = GEnum.InvestPresentMode.固定给酒,
+                BaseNum = "1",
+                BearWay = new ProtocolBaseBearway()
+                {
+                    ID = "FeeBear2",
+                    GivingWayType= GEnum.InvestPresentMode.固定给酒,
+                    FillWay = 3,
+                    FeeCompany = "6",
+                    RateCompany = "100",
+                    FeeDistributor = "0",
+                    RateDistributor = "0",
+                    State = 3
+                },
+                InvestDetail = new List<ProtocolBaseInvestdetail>()
+                {
+                    new ProtocolBaseInvestdetail(){
+                        ID = "InvestDetail1",
+                        InvestMonth = "1",
+                        InvestAmount = 2,
+                        State = 3
+                    },
+                    new ProtocolBaseInvestdetail(){
+                        ID = "InvestDetail6",
+                        InvestMonth = "2",
+                        InvestAmount = 2,
+                        State = 3
+                    },
+                    new ProtocolBaseInvestdetail()
+                    {
+                        ID = "InvestDetail7",
+                        InvestMonth = "3",
+                        InvestAmount = 2,
+                        State = 3
+                    }
+                },
+                PayRate = new ProtocolBaseGdgjPayrate()
+                {
+                    PayRateC2DType = GEnum.PayRateD2CType.分月平均支付,
+                    State = 3,
+                    PayMonthsC2D = new List<ProtocolBaseGdgjPaymonthsc2d>()
+                    {
+                        new ProtocolBaseGdgjPaymonthsc2d()
+                        {
+                            ID = "PayMonth1",
+                            ProtocalMonth = "",
+                            AmountC2D = "",
+                            State = 3
+                        }
+                    },
+                }
+            };
+        model.ProtocolBaseGdgjDatas.Add(temp);
+    }
+
+    /// <summary>
+    /// 移除投入/预估投入
+    /// </summary>
+    /// <param name="no"></param>
+    private void RemoveTRorYGTR(string no)
+    {
+        if (model.ProtocolBaseGdgjDatas.Count <= 1) return;
+        var find = model.ProtocolBaseGdgjDatas.Where(s => s.No == no).First();
+        if (find != null)
+            model.ProtocolBaseGdgjDatas.Remove(find);
+    }
+}
+

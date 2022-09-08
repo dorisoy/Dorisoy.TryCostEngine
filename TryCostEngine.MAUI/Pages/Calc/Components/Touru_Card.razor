@@ -1,0 +1,232 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+@*投入信息*@
+<MudGrid>
+    <MudItem xs="12" sm="6" md="2">
+        <MudSwitch @bind-Checked="@Model.IsBLBJG" Label="是否保量保结构" Color="Color.Primary" Class="mb-4" />
+    </MudItem>
+</MudGrid>
+
+
+<MudTable Items="@Items"
+          @ref="table"
+          T="ProtocolBaseFydlzhDatum"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+    <ColGroup>
+        <col style="width: 100px" />
+        <col style="width: 150px" />
+        <col style="width: 150px" />
+        @{
+            foreach (ProtocolBaseReqAmounts col in DynamicColums)
+            {
+                    <col />
+            }
+        }
+        <col style="width: 120px" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入编号</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">业务类型</MudTh>
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">套装</MudTh>
+
+        @foreach (ProtocolBaseReqAmounts col in DynamicColums)
+        {
+            <MudTh title="达量标准" Style="text-align:center" Class="mud-all-table-header-row">@($"{col.NaturalMonth}")</MudTh>
+        }
+
+        <MudTh Style="text-align:center" Class="mud-all-table-header-row">操作</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+
+        @*投入编号*@
+        <MudTd Class="pa-2 gap-2" DataLabel="No">
+            <MudTextField @bind-Value="context.No"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense"
+                              ReadOnly="true" />
+        </MudTd>
+
+        @*业务类型*@
+        <MudTd Class="pa-2 gap-2" DataLabel="BusinessTypeName">
+            <MudForm Model="@context">
+                <MudSelect T="string"
+                           @bind-Value="context.BusinessTypeName"
+                           For="(() => context.BusinessTypeName)"
+                           AnchorOrigin="Origin.BottomCenter"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           >
+                    <MudSelectItem T="string" Value="@("合作费")" />
+                    <MudSelectItem T="string" Value="@("意见领袖费用")" />
+                    <MudSelectItem T="string" Value="@("自定义")" />
+                </MudSelect>
+            </MudForm>
+        </MudTd>
+
+        @*选择套装*@
+        <MudTd Class="pa-2 gap-2" DataLabel="SetNo">
+            <MudSelect Variant="Variant.Outlined"
+                       Margin="Margin.Dense"
+                       @bind-Value="context.SetNo">
+                @foreach (var pk in setNos)
+                {
+                    <MudSelectItem T="string" Value="@pk">@pk</MudSelectItem>
+                }
+            </MudSelect>
+        </MudTd>
+
+        @*达量标准*@
+        @{
+            var cols = context.ReqAmounts.Where(s => string.IsNullOrEmpty(s.ProductRequiredGoodCD)).ToList();
+            foreach (ProtocolBaseReqAmounts item in cols)
+            {
+                    <MudTd Class="pa-2 gap-2" DataLabel="TotalAmount">
+                        <MudForm Model="@item">
+                            <MudTextField @bind-Value="item.Volumes"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+                        </MudForm>
+                    </MudTd>
+            }
+        }
+
+        <MudTd Class="pa-2 gap-2 justify-center align-center">
+            <MudForm Model="@context">
+                <MudButtonGroup Variant="Variant.Filled">
+                    <MudIconButton Icon="@Icons.Filled.Add"
+                                   Color="Color.Primary"
+                                   OnClick="AddTRInfo" />
+
+                    <MudIconButton Icon="@Icons.Filled.Delete"
+                                   Color="Color.Primary"
+                                   OnClick="@(()=>RemoveTRInfo(context.No))" />
+                </MudButtonGroup>
+            </MudForm>
+        </MudTd>
+
+    </RowTemplate>
+
+</MudTable>
+
+
+@*产品达量要求*@
+@if (Model.IsBLBJG)
+{
+    <MudText  Class="mt-4 mb-4">
+        <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Primary" Class="mr-3 mb-n1" /> 达量要求
+    </MudText>
+
+    <MudTable Items="@Items"
+          @ref="table"
+          T="ProtocolBaseFydlzhDatum"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+        <ColGroup>
+            <col style="width: 100px" />
+            <col />
+        </ColGroup>
+
+        <HeaderContent>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">投入编号</MudTh>
+            <MudTh Style="text-align:center" Class="mud-all-table-header-row">产品达量要求</MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+
+            @*投入编号*@
+            <MudTd Class="pa-2 gap-2" DataLabel="No">
+                 <MudTextField @bind-Value="context.No"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense"
+                              ReadOnly="true"/>
+            </MudTd>
+
+            @*产品达量要求*@
+            <MudTd Class="pa-2 gap-2" DataLabel="TotalAmount">
+                <BLBJG_Card Model="context" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+
+
+@code
+{
+     [Parameter]
+    public ProtocolBaseFydlzh Model { get; set; }
+
+
+    MudTable<ProtocolBaseFydlzhDatum> table;
+
+
+    private IEnumerable<string> options { get; set; } = new HashSet<string>() { "" };
+    private string[] setNos;
+
+    [CascadingParameter(Name = "ParameterModel")]
+    public ParameterModel ParameterModel { get; set; }
+
+    public List<ProtocolBaseReqAmounts> DynamicColums;
+    private List<ProtocolBaseFydlzhDatum> _items;
+    [Parameter]
+    public List<ProtocolBaseFydlzhDatum> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        //初始化
+        if (Items.Any())
+        {
+            setNos = Items.Select(s => s.SetNo).ToArray();
+
+            var firstRow = Items.First();
+            if (firstRow != null)
+                DynamicColums = firstRow.ReqAmounts
+                .Where(s => string.IsNullOrEmpty(s.ProductRequiredGoodCD))
+                .ToList();
+        }
+    }
+
+    private void AddTRInfo()
+    {
+        var that = Items.First();
+        var temp = CloneExtends.DeepCloneObject<ProtocolBaseFydlzhDatum>(that);
+        temp.No = UtilHelpher.GenerateSerialNumber("008", Items.Count);
+        Items.Add(temp);
+    }
+
+
+    private void RemoveTRInfo(string id)
+    {
+        if (Items.Count <= 1)
+        {
+            Snackbar.Add("已经是最后一项了!");
+            return;
+        }
+        var find = Items.Where(s => s.No == id).First();
+        if (find != null)
+            Items.Remove(find);
+    }
+}

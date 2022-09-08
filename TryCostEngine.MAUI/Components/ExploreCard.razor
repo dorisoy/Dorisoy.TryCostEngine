@@ -1,0 +1,43 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+
+<a href="javascript:;" @onclick="@Selected">
+    <MudBadge Icon="@Icons.Material.Filled.Lock" Color="Color.Primary" Overlap="true" Bordered="true" Visible="@Product.Selected">
+        <MudPaper Outlined="true" Class="pa-2 rounded-lg d-flex flex-column">
+            <MudPaper Elevation="0" Class="rounded-lg docs-gray-bg explore-card">
+                <div class="d-flex justify-center align-center relative pa-6 mud-height-full mud-width-full">
+                    <MudTooltip Duration="1000" Text="@Product.Text" Placement="Placement.Top" Color="Color.Primary">
+                        @ChildContent
+                    </MudTooltip>
+                </div>
+            </MudPaper>
+            <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Center">@Product.Value</MudText>
+        </MudPaper>
+    </MudBadge>
+</a>
+
+@code {
+    [Parameter] public SelectListModel Product { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    [Parameter] public EventCallback<SelectListModel> SelectedCallback { get; set; }
+
+    /// <summary>
+    /// 选择商品
+    /// </summary>
+    private async Task Selected()
+    {
+        if (SelectedCallback.HasDelegate)
+        {
+            Product.Selected = true;
+            await SelectedCallback.InvokeAsync(Product);
+        }
+
+        StateHasChanged();
+    }
+}

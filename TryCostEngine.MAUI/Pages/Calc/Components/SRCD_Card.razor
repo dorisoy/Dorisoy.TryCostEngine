@@ -1,0 +1,81 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Calculate" Color="Color.Primary" Class="mr-3 mb-n1" />
+            @this.MudDialog.Title
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+
+        @*销量填报规则*@
+        <MudTable Items="@Items"
+                  Hover="true"
+                  Breakpoint="Breakpoint.None"
+                  Dense="@true"
+                  Elevation="1">
+            <HeaderContent>
+                @foreach (ProtocolBaseVolume col in Product.Volumes)
+                {
+                    <MudTh title="自然月"
+                       Style="text-align:center"
+                       Class="mud-all-table-header-row">@(
+                    $"{col.NaturalMonth}"
+                    )</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @{
+                    foreach (ProtocolBaseVolume item in Product.Volumes)
+                    {
+                        <MudTd Class="pa-2 gap-2" DataLabel="YuguSales">
+                            <MudNumericField @bind-Value="item.YuguSales"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" Disabled="@(Product.SaleWriteRuleCD!=3)" />
+                        </MudTd>
+                    }
+                }
+            </RowTemplate>
+        </MudTable>
+
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" OnClick="Cancel" Class="mb-4">取消</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Class="mr-4 mb-4">确定</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+
+@code
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public ProtocolBaseGoodinfo Product { get; set; }
+
+    public List<ProtocolBaseGoodinfo> Items;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Items = new List<ProtocolBaseGoodinfo>() { Product };
+    }
+
+    private void Submit()
+    {
+        this.Product.EstimatedTotalSales = this.Product.Volumes.Sum(s => s.YuguSales);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

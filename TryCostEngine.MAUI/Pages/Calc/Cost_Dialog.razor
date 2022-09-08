@@ -1,0 +1,173 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using Newtonsoft.Json
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Calculate" Color="Color.Primary" Class="mr-3 mb-n1" />
+            @this.MudDialog.Title
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTable T="CostEngineFeeResult"
+                  Items="@Items"
+                  Hover="true"
+                  Breakpoint="Breakpoint.None"
+                  Dense="@true"
+                  Elevation="1">
+
+            <HeaderContent>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">费用类型</MudTh>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">投入编号</MudTh>
+                <MudTh Style="text-align:center;width:100px" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">按产品</MudTh>
+                <MudTh Style="text-align:center;width:100px" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">按赠品</MudTh>
+                <MudTh Style="text-align:right" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">总费用</MudTh>
+                <MudTh Style="text-align:right" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">公司承担总费用</MudTh>
+                <MudTh Style="text-align:right" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">总件数</MudTh>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">投入方式</MudTh>
+                <MudTh Style="text-align:right" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">一批商承担比例</MudTh>
+                <MudTh Style="text-align:right" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">二批商承担比例</MudTh>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">业务类型</MudTh>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">业务类型名称</MudTh>
+                <MudTh Style="text-align:center" Class="pa-0 pt-2 pb-2 mud-all-table-header-row">是否核销</MudTh>
+    @*            <MudTh>终端编号</MudTh>
+                <MudTh>终端名称</MudTh>*@
+            </HeaderContent>
+
+            <RowTemplate>
+
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@context.CostType</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@context.PromotionID</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.PromotionID))">
+                        @((context.ShowProducts == true) ? "-" : "+")
+                        @context.Products.Count()
+                    </MudButton>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.PromotionID))">
+                        @((context.ShowGifts == true) ? "-" : "+")
+                        @context.Gifts.Count()
+                    </MudButton>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudText>@context.CostCount</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudText>@context.CostCompanyCount</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudText>@context.GiftCount</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@context.GivingWayType</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudText>@context.RateDistributor1</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:right">
+                    <MudText>@context.RateDistributor2</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@(string.IsNullOrEmpty(context.BusinessType) ? "-" : context.BusinessType)</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@(string.IsNullOrEmpty(context.BusinessTypeName) ? "-" : context.BusinessTypeName)</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2" Style="text-align:center">
+                    <MudText>@(context.IsVerification?"是":"否")</MudText>
+                </MudTd>
+           @*     <MudTd Class="pa-2 gap-2">
+                    <MudText>@context.TMNCD</MudText>
+                </MudTd>
+                <MudTd Class="pa-2 gap-2">
+                    <MudText>@context.TMNNM</MudText>
+                </MudTd>*@
+            </RowTemplate>
+
+            <ChildRowContent>
+
+                @*产品明细*@
+                @if (context.ShowProducts)
+                {
+                    <MudTr>
+                        <td colspan="3"></td>
+                        <td colspan="11">
+                            <MudCard Elevation="0">
+                                <MudCardContent Class="pa-2">
+                                    <MudTable Items="@context.Products" Context="prod" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="1">
+                                        <ColGroup>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                        </ColGroup>
+                                        <HeaderContent>
+                                            <MudTh Class="mud-all-table-header-row">产品Id</MudTh>
+                                            <MudTh Class="mud-all-table-header-row">产品名称</MudTh>
+                                            <MudTh Class="mud-all-table-header-row">费用</MudTh>
+                                            <MudTh Class="mud-all-table-header-row">公司承担费用</MudTh>
+                                        </HeaderContent>
+                                        <RowTemplate>
+                                            <MudTd>@prod.ProductID</MudTd>
+                                            <MudTd>@prod.ProductName</MudTd>
+                                            <MudTd>@prod.CostCount</MudTd>
+                                            <MudTd>@prod.CostCompanyCount</MudTd>
+                                        </RowTemplate>
+                                    </MudTable>
+                                </MudCardContent>
+                            </MudCard>
+                        </td>
+                    </MudTr>
+                }
+
+
+            </ChildRowContent>
+        </MudTable>
+
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.Close" OnClick="Cancel" Class="mr-2 mb-4">关闭</MudButton>
+            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.ImportExport" Color="Color.Info" OnClick="Submit" Class="mr-2 mb-4">导出</MudButton>
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.Print" Color="Color.Primary" OnClick="Submit" Class="mr-4 mb-4">打印</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private List<CostEngineFeeResult> _items;
+    [Parameter]
+    public List<CostEngineFeeResult> Items
+    {
+        get { return _items; }
+        set
+        {
+            if (!(_items?.Equals(value) ?? false))
+            {
+                _items = value;
+            }
+        }
+    }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+
+    private void ShowBtnPress(string nr)
+    {
+        CostEngineFeeResult tmp = Items.First(f => f.PromotionID == nr);
+        tmp.ShowProducts = !tmp.ShowProducts;
+    }
+}
+

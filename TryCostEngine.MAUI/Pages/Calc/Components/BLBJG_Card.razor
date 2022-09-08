@@ -1,0 +1,70 @@
+﻿@using FluentValidation
+@using CostEngine.Data.Models
+@using GEnum = CostEngine.Data.Constants.TPDataConstant
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+@using CostEngine.Data.Constants
+
+@*产品达量要求*@
+
+<MudTable 
+          T="ProtocolBaseSet"
+          Items="@Model.Sets"
+          Hover="true"
+          Breakpoint="Breakpoint.None"
+          Dense="@true"
+          Elevation="1">
+    <ColGroup>
+        <col />
+        @{
+            foreach (var col in DynamicColums)
+            {
+                    <col />
+            }
+        }
+    </ColGroup>
+    <HeaderContent>
+        <MudTh Class="mud-all-table-header-row">产品</MudTh>
+        @foreach (var col in DynamicColums)
+        {
+            <MudTh Class="mud-all-table-header-row">@col.NaturalMonth</MudTh>
+        }
+    </HeaderContent>
+    <RowTemplate>
+
+        <MudTd Class="pa-2 gap-2">
+            <MudTextField @bind-Value="context.GoodNm"
+                          ReadOnly="true"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense" />
+        </MudTd>
+
+        @{
+            var currDynamicColums = Model.ReqAmounts.Where(s => !string.IsNullOrEmpty(s.ProductRequiredGoodCD) && s.ProductRequiredGoodCD == context.SetGoodCD).ToList();
+            foreach (var col in DynamicColums)
+            {
+                <MudTd Class="pa-2 gap-2">
+                    <MudTextField @bind-Value="col.Volumes"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense" />
+                </MudTd>
+            }
+        }
+       
+    </RowTemplate>
+</MudTable>
+
+
+@code
+{
+    [Parameter]
+    public ProtocolBaseFydlzhDatum Model { get; set; }
+
+    public List<ProtocolBaseReqAmounts> DynamicColums;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        DynamicColums = Model.ReqAmounts.Where(s => string.IsNullOrEmpty(s.ProductRequiredGoodCD)).ToList();
+    }
+}
