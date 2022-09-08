@@ -1,5 +1,5 @@
 # Dorisoy.TryCostEngine
-.netcore 6 下 使用 Blazor + MAUI 构建桌面版的销售费用计算模拟器
+一个 .netcore 6 下 使用 Blazor + MAUI 构建桌面版的销售费用计算模拟器实例
 
 
 ## Blazor在MAUI下几个问题：
@@ -19,3 +19,13 @@ https://github.com/dotnet/maui/issues/5804
 
 7.关于HttpClient 的最佳实践是——不要在 MAUI 中使用 builder.Services.AddHttpClient，请使用AddSingleton 创建实例。
 
+
+<img src="https://github.com/dorisoy/Dorisoy.TryCostEngine/blob/main/Scn%20(1).png?raw=true"/>
+
+<img src="https://github.com/dorisoy/Dorisoy.TryCostEngine/blob/main/Scn%20(2).png?raw=true"/>
+
+<img src="https://github.com/dorisoy/Dorisoy.TryCostEngine/blob/main/Scn%20(3).png?raw=true"/>
+
+<img src="https://github.com/dorisoy/Dorisoy.TryCostEngine/blob/main/Scn%20(4).png?raw=true"/>
+
+<img src="https://github.com/dorisoy/Dorisoy.TryCostEngine/blob/main/Scn%20(5).png?raw=true"/>
