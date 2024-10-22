@@ -1,5 +1,5 @@
 # Dorisoy.TryCostEngine
-一个 .netcore 6 下 使用 Blazor + MAUI 构建桌面版的销售费用计算模拟器实例
+.netcore 6 下 使用 Blazor + MAUI 构建桌面版的销售费用计算模拟器实例
 
 
 ## Blazor在MAUI下几个问题：
